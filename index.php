@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 
@@ -45,10 +45,17 @@ function decreaseValue(a)
 }
 </script>
 </head>
-
-
-
 <body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-93298002-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 
 
 
@@ -71,7 +78,7 @@ AUTOMAT
 	<div class="cena">30 Kč</div>
 
 	<div class="akce">   <!-- AKční panel -->
-	Akce do 14.3.
+	Akce do 14. 3.
 	</div>
 
 	<p>Počet</p>
@@ -84,6 +91,66 @@ AUTOMAT
 	</tr>
 	</table>
 
+</div>
+
+<div class="product">             <!-- Produkt Margot -->
+
+
+	<img src="croissant.png">
+
+	<div class="popisek">7Days Croissant double </div>
+
+
+	<div class="cena">12 Kč</div>
+
+	<div class="novinka">   <!-- Novinka panel -->
+	Novinka
+	</div>
+
+<table class="varianta">
+    <tr>
+      <td class="volba">
+        <label class="radio">
+        <input type="radio" name="volba_croissant" value="Kakao - kokos" checked>
+        <span class="outer"><span class="inner"></span></span>Kakao - kokos</label>
+      </td>
+      <td class="volba">
+        <label class="radio">
+        <input type="radio" name="volba_croissant" value="Vanilka - višeň">
+        <span class="outer"><span class="inner"></span></span>Vanilka -višeň</label>
+      </td>
+    </tr>
+  </table>
+	<p>Počet</p>
+
+	<table class="pocet">
+	<tr>
+	<td class="plusminus"><input type="button" onclick="decreaseValue('croissant')" value="-" ></td>
+	<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="croissant" step="1"  name="croissant" value="0" min="0" ></td>
+	<td class="plusminus"><input type="button" onclick="increaseValue('croissant')" value="+" ></td>
+	</tr>
+	</table>
+
+</div>
+
+<div class="product">             <!-- Produkt Trancetto -->
+	<img src="trancetto.jpg">
+
+	<div class="popisek">Trancetto 28g</div>
+
+	<div class="cena"> 10 Kč</div>
+	<div class="akce">   <!-- AKční panel -->
+	Sleva 10% 
+	</div>
+	<p>Počet</p>
+
+	<table class="pocet">
+	<tr>
+	<td class="plusminus"><input type="button" onclick="decreaseValue('trancetto')" value="-" class="pocet"></td>
+	<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="trancetto" step="1"  name="trancetto" value="0" min="0" class="pocet"></td>
+	<td class="plusminus"><input type="button" onclick="increaseValue('trancetto')" value="+" class="pocet"></td>
+	</tr>
+	</table>
 </div>
 
 
@@ -165,10 +232,6 @@ AUTOMAT
 
 	<div class="cena">14 Kč</div>
 
-	<div class="vyprodano">   <!-- Novinka panel -->
-	Vyprodáno
-	</div>
-
 	<p>Počet</p>
 
 	<table class="pocet">
@@ -208,10 +271,6 @@ AUTOMAT
 
 	<div class="cena">18 Kč</div>
 
-	<div class="novinka">   <!-- Novinka panel -->
-	Novinka
-	</div>
-
 	<p>Počet</p>
 
 	<table class="pocet">
@@ -224,7 +283,7 @@ AUTOMAT
 </div>
 
 <div class="product">             <!-- Produkt Capri-sonne -->
-	<img src="caprisone.jpg">
+	<img src="caprisone.png">
 
 	<div class="popisek">Capri-Sonne 0,2l</div>
 
@@ -239,7 +298,7 @@ AUTOMAT
       </td>
       <td class="volba">
         <label class="radio">
-        <input type="radio" name="volba_capri" value="multipla">
+        <input type="radio" name="volba_capri" value="Multivitamín">
         <span class="outer"><span class="inner"></span></span>Multivitamín</label>
       </td>
     </tr>
@@ -255,28 +314,12 @@ AUTOMAT
 	</table>
 </div>
 
-<div class="product">             <!-- Produkt Trancetto -->
-	<img src="trancetto.jpg">
-
-	<div class="popisek">Trancetto 28g</div>
-
-	<div class="cena"> 12 Kč</div>
-
-	<p>Počet</p>
-
-	<table class="pocet">
-	<tr>
-	<td class="plusminus"><input type="button" onclick="decreaseValue('trancetto')" value="-" class="pocet"></td>
-	<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="trancetto" step="1"  name="trancetto" value="0" min="0" class="pocet"></td>
-	<td class="plusminus"><input type="button" onclick="increaseValue('trancetto')" value="+" class="pocet"></td>
-	</tr>
-	</table>
-</div>
 
 <br>
 
 <input type="text" placeholder="Jméno" name="name" required><br />
 <input type="email" placeholder="Email" name="email"></p>
+<p class="doruceni">* Nepovinný údaj</p>
 <select name="time">
 
 	<option value="0">--- Čas přestávky ---</option>
@@ -417,7 +460,8 @@ AUTOMAT
 	<option value="313">313</option>
 	<option value="314">314</option>
 	<option value="315">315</option>
-	<option value="666">Aula</option>
+	<option value="Aula">Aula</option>
+	<option value="Knihovna">Knihovna</option>
 </select>
 
 
@@ -426,6 +470,11 @@ AUTOMAT
 
 
 </form>
+
+<a href="feedback"><p class="feedback">Nenašli jste co jste hledali? Napište nám...</p></a>
+
+
+
 </div>
 
 <iframe class=add><endora></iframe>

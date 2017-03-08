@@ -1,0 +1,15 @@
+#feedback{
+    margin-top: 15px;
+    margin-top: 40px;
+    width: 80%;
+    height: 1000px;
+    font-size: 4em;
+}
+
+#feedback_submit{
+	border: none;
+    background-color: rgb(159, 216, 36);
+    width: 80%;
+    height: 6em;
+    color: rgb(255, 255, 255);
+}

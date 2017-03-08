@@ -225,7 +225,8 @@
 }
 
 .varianta {
-	margin-bottom: 70px;
+	margin-top: 30px;
+	margin-bottom: 60px;
 }
 
 .pocet_input input {
@@ -336,3 +337,15 @@ body {
 .taste{
 	position: absolute;
 }
+
+.feedback{
+	font-size: 2em;
+    text-align: left;
+    color: rgb(128, 128, 128);
+    margin-left: 10%;
+    margin-top: 50px;
+  
+}
+
+a:visited {color:rgb(128, 128, 128);}
+a:hover {color:rgb(128, 128, 128);}

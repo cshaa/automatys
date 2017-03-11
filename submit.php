@@ -49,7 +49,7 @@ $margot_price 				= 15;
 $tribit_price 				= 15;
 $snickers_price 			= 16;
 $kofila_price 				= 14;
-$straznicke_bramburky_price = 18;
+$straznicke_bramburky_price = 16;
 $cocacola_price 			= 18;
 $trancetto_price			= 10;
 $caprisone_price			= 15;
@@ -74,6 +74,7 @@ $volba_capri 					= $_POST['volba_capri'];
 
 $croissant_input				= $_POST['croissant'];
 $volba_croissant				= $_POST['volba_croissant'];
+$volba_straznicke				= $_POST['volba_straznicke'];
 
 
 $email_input	= $_POST['email'];
@@ -109,7 +110,7 @@ if(!empty($margot_input) || !empty($tribit_input) || !empty($snickers_input) || 
 			}
 
 			If($straznicke_bramburky_input 	> "0"){
-				$straznicke_bramburky = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Strážnické brambůrky............ ' . $straznicke_bramburky_input . ' ks </p><br />';
+				$straznicke_bramburky = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Strážnické brambůrky / '. $volba_straznicke .'............ ' . $straznicke_bramburky_input . ' ks </p><br />';
 				$price = $price + $straznicke_bramburky_input * $straznicke_bramburky_price; //zde cena <<<<
 			}
 

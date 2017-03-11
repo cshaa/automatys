@@ -93,7 +93,7 @@ AUTOMAT
 
 </div>
 
-<div class="product">             <!-- Produkt Margot -->
+<div class="product">             <!-- Produkt Croissant -->
 
 
 	<img src="croissant.png">
@@ -207,9 +207,7 @@ AUTOMAT
 
 	<div class="cena">18 Kč</div>
 
-	<div class="akce">   <!-- AKční panel -->
-	Akční nabídka
-	</div>
+	
 
 	<p>Počet</p>
 
@@ -265,12 +263,25 @@ AUTOMAT
 
 
 <div class="product">             <!-- Produkt Strážnické brambůrky -->
-	<img src="straznicke_bramburky.jpg">
+	<img src="straznicke.png">
 
 	<div class="popisek">Strážnické brambůrky 60g</div>
 
-	<div class="cena">18 Kč</div>
-
+	<div class="cena">16 Kč</div>
+<table class="varianta">
+    <tr>
+      <td class="volba">
+        <label class="radio">
+        <input type="radio" name="volba_straznicke" value="Solené" checked>
+        <span class="outer"><span class="inner"></span></span>Solené</label>
+      </td>
+      <td class="volba">
+        <label class="radio">
+        <input type="radio" name="volba_straznicke" value="Česnekové">
+        <span class="outer"><span class="inner"></span></span>Česnekové</label>
+      </td>
+    </tr>
+  </table>
 	<p>Počet</p>
 
 	<table class="pocet">
@@ -334,9 +345,9 @@ AUTOMAT
 			$month 	= date("n");
 			$year 	= date("Y");
 			$tom 	= ' / Zítra '. $day.'.'.$month.'.'.$year;
-			echo 'value="8:45 - 8:55 - Zítra '.$day.'.'.$month.'">8:45 - 8:55'.$tom;
+			echo 'value="8:45 - 8:55 - Zítra '.$day.'.'.$month.'" disabled>8:45 - 8:55'.$tom;
 			}else{
-			echo 'value="8:45 - 8:55">8:45  - 8:55 - Dnes';
+			echo 'value="8:45 - 8:55" disabled>8:45  - 8:55 - Dnes';
 			}
 		?>
 	</option>
@@ -404,9 +415,9 @@ AUTOMAT
 			$month 	= date("n");
 			$year 	= date("Y");
 			$tom 	= ' / Zítra '. $day.'.'.$month.'.'.$year;
-			echo 'value="12:35 - 12:40 - Zítra '.$day.'.'.$month.'">12:35 - 12:40'.$tom;
+			echo 'value="12:35 - 12:40 - Zítra '.$day.'.'.$month.'" disabled>12:35 - 12:40'.$tom;
 			}else{
-			echo 'value="12:35 - 12:40">12:35 - 12:40 - Dnes';
+			echo 'value="12:35 - 12:40" disabled>12:35 - 12:40 - Dnes';
 			}
 		?>
 	</option>

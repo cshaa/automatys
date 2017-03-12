@@ -36,10 +36,10 @@
       Mezery na konci řádku není potřeba psát.
     */
     $nas_rozvrh = [
-      " XXXXX", //Pak je matika
-      " XX XX", //Tělák, pak je fyzika
+      " XXXXXXXXX", //Honza dodává až do čtyř :)
+      " XX XX X X", //Tělák, pak fyzika, pak Paj
       " XXXXXXXX", //I s deskriptivou
-      " XXXXX", //O Paj/Sfe se nedoručuje
+      " XXXXX XXX", //O Cvma/Sfe se nedoručuje
       " XXXXXX" //O lit./právu doručuje David
     ];
 
@@ -64,25 +64,6 @@
 
     $dnes = $den_v_tydnu = date("N")-1; //po=0; ne=6
     $minuta_v_dnu = date("i") + date("G")*60;
-
-    /*
-      FIXME Až bude otestováno, odeber tento kód! ☠
-    */
-        if( isset($_GET["d"]) ){
-          $d = $_GET["d"];
-          if( floor($d) == $d && $d >= 0 && $d < 7 ){
-            $dnes = $den_v_tydnu = $d;
-          }
-        }
-        if( isset($_GET["h"]) && isset($_GET["m"]) ){
-          $h = $_GET["h"];
-          $m = $_GET["m"];
-          if( floor($h) == $h && $h >= 0 && $h < 24
-           && floor($m) == $m && $m >= 0 && $m < 60){
-            $minuta_v_dnu = $m + $h*60;
-          }
-        }
-    // KONEC FIXME
 
     /*
       Změň časy přestávek na počítačem čitelný formát.

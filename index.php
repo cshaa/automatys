@@ -2,6 +2,8 @@
 <html>
 <head>
 
+<meta charset=utf-8 />
+
 <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
@@ -68,10 +70,10 @@ AUTOMAT
 
 
 
-<div class="product">             <!-- Produkt Margot -->
+<div class="product">             <!-- Produkt Premium -->
 
 
-	<img src="cola_bramburky.jpg">
+	<img src="cola_bramburky.png">
 
 	<div class="popisek">Premium menu</div>
 
@@ -88,6 +90,31 @@ AUTOMAT
 	<td class="plusminus"><input type="button" onclick="decreaseValue('cola_bramburky')" value="-" ></td>
 	<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="cola_bramburky" step="1"  name="menu" value="0" min="0" ></td>
 	<td class="plusminus"><input type="button" onclick="increaseValue('cola_bramburky')" value="+" ></td>
+	</tr>
+	</table>
+
+</div>
+
+<div class="product">             <!-- Produkt Opice -->
+
+
+	<img src="opice.jpg">
+
+	<div class="popisek">Opičí sezóna</div>
+
+	<div class="cena">28 Kč</div>
+
+	<div class="akce">   <!-- AKční panel -->
+	Akce do 14. 3.
+	</div>
+
+	<p>Počet</p>
+
+	<table class="pocet">
+	<tr>
+	<td class="plusminus"><input type="button" onclick="decreaseValue('opice')" value="-" ></td>
+	<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="opice" step="1"  name="menu" value="0" min="0" ></td>
+	<td class="plusminus"><input type="button" onclick="increaseValue('opice')" value="+" ></td>
 	</tr>
 	</table>
 
@@ -133,6 +160,28 @@ AUTOMAT
 
 </div>
 
+<div class="product">             <!-- Produkt Banan -->
+
+
+	<img src="banan.jpg">
+
+	<div class="popisek">Banán</div>
+
+	<div class="cena">6 Kč</div>
+
+
+	<p>Počet</p>
+
+	<table class="pocet">
+	<tr>
+	<td class="plusminus"><input type="button" onclick="decreaseValue('banan')" value="-" ></td>
+	<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="banan" step="1"  name="menu" value="0" min="0" ></td>
+	<td class="plusminus"><input type="button" onclick="increaseValue('banan')" value="+" ></td>
+	</tr>
+	</table>
+
+</div>
+
 <div class="product">             <!-- Produkt Trancetto -->
 	<img src="trancetto.jpg">
 
@@ -140,7 +189,7 @@ AUTOMAT
 
 	<div class="cena"> 10 Kč</div>
 	<div class="akce">   <!-- AKční panel -->
-	Sleva 10% 
+	Sleva 10%
 	</div>
 	<p>Počet</p>
 
@@ -207,7 +256,7 @@ AUTOMAT
 
 	<div class="cena">18 Kč</div>
 
-	
+
 
 	<p>Počet</p>
 
@@ -222,6 +271,52 @@ AUTOMAT
 
 </div>
 
+
+<div class="product">             <!-- Produkt Sprite -->
+
+
+	<img src="sprite.jpg">
+
+	<div class="popisek">Sprite 0,33l</div>
+
+	<div class="cena">18 Kč</div>
+
+
+
+	<p>Počet</p>
+
+	<table class="pocet">
+	<tr>
+	<td class="plusminus"><input type="button" onclick="decreaseValue('sprite')" value="-" ></td>
+	<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="sprite" step="1"  name="sprite" value="0" min="0" ></td>
+	<td class="plusminus"><input type="button" onclick="increaseValue('sprite')" value="+" ></td>
+	</tr>
+	</table>
+
+
+</div>
+
+<div class="product">             <!-- Produkt Delisssa -->
+
+
+	<img src="delissa.jpg">
+
+	<div class="popisek">Delissa</div>
+
+	<div class="cena">6 Kč</div>
+
+
+	<p>Počet</p>
+
+	<table class="pocet">
+	<tr>
+	<td class="plusminus"><input type="button" onclick="decreaseValue('delissa')" value="-" ></td>
+	<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="delissa" step="1"  name="menu" value="0" min="0" ></td>
+	<td class="plusminus"><input type="button" onclick="increaseValue('delissa')" value="+" ></td>
+	</tr>
+	</table>
+
+</div>
 
 <div class="product">             <!-- Produkt Kofila -->
 	<img src="kofila.jpg">
@@ -331,117 +426,9 @@ AUTOMAT
 <input type="text" placeholder="Jméno" name="name" required><br />
 <input type="email" placeholder="Email" name="email"></p>
 <p class="doruceni">* Nepovinný údaj</p>
-<select name="time">
 
-	<option value="0">--- Čas přestávky ---</option>
-
-	<!-- 8:45 - 8:55 -->
-	<option
-		<?php
-			If(date("H") == 8  && date("i") > 53 || date("H") > 8 && date("H") < 14){
-			echo 'value="8:45  - 8:55" disabled>8:45  - 8:55 *';
-			}elseif (date("H") >= 14) {
-			$day 	= date("d") + 1;
-			$month 	= date("n");
-			$year 	= date("Y");
-			$tom 	= ' / Zítra '. $day.'.'.$month.'.'.$year;
-			echo 'value="8:45 - 8:55 - Zítra '.$day.'.'.$month.'" disabled>8:45 - 8:55'.$tom;
-			}else{
-			echo 'value="8:45 - 8:55" disabled>8:45  - 8:55 - Dnes';
-			}
-		?>
-	</option>
-
-	<!-- 9:40 - 10:00 -->
-	<option
-		<?php
-			If(date("H") == 9  && date("i") > 58 || date("H") > 9 && date("H") < 14){
-			echo 'value="9:40  - 10:00" disabled>9:40  - 10:00 *';
-
-			}elseif (date("H") >= 14) {
-			$day 	= date("d") + 1;
-			$month 	= date("n");
-			$year 	= date("Y");
-			$tom 	= ' / Zítra '. $day.'.'.$month.'.'.$year;
-			echo 'value="9:40 - 10:00 - Zítra '.$day.'.'.$month.'">9:40 - 10:00'.$tom;
-			}else{
-			echo 'value="9:40 - 10:00">9:40 - 10:00 - Dnes';
-			}
-		?>
-	</option>
-
-	<!-- 10:45 - 10:55 -->
-	<option
-		<?php
-			If(date("H") == 10  && date("i") > 56 || date("H") > 10 && date("H") < 14){
-			echo 'value="10:45 - 10:55" disabled>10:45 - 10:55 *';
-			}elseif (date("H") >= 14) {
-			$day 	= date("d") + 1;
-			$month 	= date("n");
-			$year 	= date("Y");
-			$tom 	= ' / Zítra '. $day.'.'.$month.'.'.$year;
-			echo 'value="10:45 - 10:55 - Zítra '.$day.'.'.$month.'">10:45 - 10:55'.$tom;
-			}else{
-			echo 'value="10:45 - 10:55">10:45 - 10:55 - Dnes';
-			}
-		?>
-	</option>
-
-	<!-- 11:40 - 11:50 -->
-	<option
-		<?php
-			If(date("H") == 11  && date("i") > 56 || date("H") > 11 && date("H") < 14){
-			echo 'value="11:40 - 11:50" disabled>11:40 - 11:50 *';
-			}elseif (date("H") >= 14) {
-			$day 	= date("d") + 1;
-			$month 	= date("n");
-			$year 	= date("Y");
-			$tom 	= ' / Zítra '. $day.'.'.$month.'.'.$year;
-			echo 'value="11:40 - 11:50 - Zítra '.$day.'.'.$month.'">11:40 - 11:50'.$tom;
-			}else{
-			echo 'value="11:40 - 11:50">11:40 - 11:50 - Dnes';
-			}
-		?>
-	</option>
-
-	<!-- 12:35 - 12:40 -->
-	<option
-		<?php
-			If(date("H") == 12  && date("i") > 39 || date("H") > 12 && date("H") < 14){
-			echo 'value="12:35 - 12:40" disabled>12:35 - 12:40 *';
-
-			}elseif (date("H") >= 14) {
-			$day 	= date("d") + 1;
-			$month 	= date("n");
-			$year 	= date("Y");
-			$tom 	= ' / Zítra '. $day.'.'.$month.'.'.$year;
-			echo 'value="12:35 - 12:40 - Zítra '.$day.'.'.$month.'" disabled>12:35 - 12:40'.$tom;
-			}else{
-			echo 'value="12:35 - 12:40" disabled>12:35 - 12:40 - Dnes';
-			}
-		?>
-	</option>
-
-	<!-- 13:25 - 13:30 -->
-	<option
-		<?php
-			If(date("H") == 13  && date("i") > 29 || date("H") > 13 && date("H") < 14){
-			echo 'value="13:25 - 13:30" disabled>13:25 - 13:30 *';
-
-			}elseif (date("H") >= 14) {
-			$day 	= date("d") + 1;
-			$month 	= date("n");
-			$year 	= date("Y");
-			$tom 	= ' / Zítra '. $day.'.'.$month.'.'.$year;
-			echo 'value="13:25 - 13:30 - Zítra '.$day.'.'.$month.'">13:25 - 13:30'.$tom;
-			}else{
-			echo 'value="13:25 - 13:30">13:25 - 13:30 - Dnes';
-			}
-		?>
-	</option>
-</select>
-
-<p class="doruceni">* Po 14:00 přijímáme objednávky na druhý den</p>
+<?php include "prestavky.php"; ?>
+<p class="doruceni">* Po uzavírce přijímáme objednávky na druhý den</p>
 
 <select name="place">
 	<option value="0">--- Místo doručení ---</option>

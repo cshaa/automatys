@@ -68,39 +68,18 @@ function decreaseValue(a)
 AUTOMAT
 </header>
 
-
-
-<div class="product">             <!-- Produkt Premium -->
-
-
-	<img src="cola_bramburky.png">
-
-	<div class="popisek">Premium menu</div>
-
-	<div class="cena">30 Kč</div>
-
-	<div class="akce">   <!-- AKční panel -->
-	Akce do 14. 3.
-	</div>
-
-	<p>Počet</p>
-
-	<table class="pocet">
-	<tr>
-	<td class="plusminus"><input type="button" onclick="decreaseValue('cola_bramburky')" value="-" ></td>
-	<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="cola_bramburky" step="1"  name="menu" value="0" min="0" ></td>
-	<td class="plusminus"><input type="button" onclick="increaseValue('cola_bramburky')" value="+" ></td>
-	</tr>
-	</table>
-
+<div class="notification">
+Prodloužili jsme pro Vás otvírací dobu!
 </div>
 
 <div class="product">             <!-- Produkt Opice -->
 
 
-	<img src="opice.jpg">
+	<img src="opice.png">
 
 	<div class="popisek">Opičí sezóna</div>
+
+	<div class="popisek-detail">Croissant + banán + Capri-Sonne</div>
 
 	<div class="cena">28 Kč</div>
 
@@ -113,12 +92,69 @@ AUTOMAT
 	<table class="pocet">
 	<tr>
 	<td class="plusminus"><input type="button" onclick="decreaseValue('opice')" value="-" ></td>
-	<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="opice" step="1"  name="menu" value="0" min="0" ></td>
+	<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="opice" step="1"  name="opice" value="0" min="0" ></td>
 	<td class="plusminus"><input type="button" onclick="increaseValue('opice')" value="+" ></td>
 	</tr>
 	</table>
-
 </div>
+
+<div class="product">             <!-- Produkt Banan -->
+
+
+	<img src="banan.jpg">
+
+	<div class="popisek">Banán</div>
+
+	<div class="cena">6 Kč</div>
+
+	<div class="akce">   <!-- AKční panel -->
+	Akce do 14. 3.
+	</div>
+	<p>Počet</p>
+
+	<table class="pocet">
+	<tr>
+	<td class="plusminus"><input type="button" onclick="decreaseValue('banan')" value="-" ></td>
+	<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="banan" step="1"  name="banan" value="0" min="0" ></td>
+	<td class="plusminus"><input type="button" onclick="increaseValue('banan')" value="+" ></td>
+	</tr>
+	</table>
+</div>
+
+<div class="product">             <!-- Produkt Premium -->
+
+
+	<img src="cola_bramburky.png">
+
+	<div class="popisek">Premium menu</div>
+
+	<div class="cena">30 Kč</div>
+		<table class="varianta">
+	    <tr>
+	      <td class="volba">
+	        <label class="radio">
+	        <input type="radio" name="volba_menu" value="Coca cola" checked>
+	        <span class="outer"><span class="inner"></span></span>Coca cola</label>
+	      </td>
+	      <td class="volba">
+	        <label class="radio">
+	        <input type="radio" name="volba_menu" value="Sprite">
+	        <span class="outer"><span class="inner"></span></span>Sprite</label>
+	      </td>
+	    </tr>
+	  </table>
+
+	<p>Počet</p>
+
+	<table class="pocet">
+	<tr>
+	<td class="plusminus"><input type="button" onclick="decreaseValue('cola_bramburky')" value="-" ></td>
+	<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="cola_bramburky" step="1"  name="menu" value="0" min="0" ></td>
+	<td class="plusminus"><input type="button" onclick="increaseValue('cola_bramburky')" value="+" ></td>
+	</tr>
+	</table>
+</div>
+
 
 <div class="product">             <!-- Produkt Croissant -->
 
@@ -134,62 +170,40 @@ AUTOMAT
 	Novinka
 	</div>
 
-<table class="varianta">
-    <tr>
-      <td class="volba">
-        <label class="radio">
-        <input type="radio" name="volba_croissant" value="Kakao - kokos" checked>
-        <span class="outer"><span class="inner"></span></span>Kakao - kokos</label>
-      </td>
-      <td class="volba">
-        <label class="radio">
-        <input type="radio" name="volba_croissant" value="Vanilka - višeň">
-        <span class="outer"><span class="inner"></span></span>Vanilka -višeň</label>
-      </td>
-    </tr>
-  </table>
-	<p>Počet</p>
+	<table class="varianta">
+	    <tr>
+	      <td class="volba">
+	        <label class="radio">
+	        <input type="radio" name="volba_croissant" value="Kakao - kokos" checked>
+	        <span class="outer"><span class="inner"></span></span>Kakao - kokos</label>
+	      </td>
+	      <td class="volba">
+	        <label class="radio">
+	        <input type="radio" name="volba_croissant" value="Vanilka - višeň">
+	        <span class="outer"><span class="inner"></span></span>Vanilka -višeň</label>
+	      </td>
+	    </tr>
+	  </table>
+		<p>Počet</p>
 
-	<table class="pocet">
-	<tr>
-	<td class="plusminus"><input type="button" onclick="decreaseValue('croissant')" value="-" ></td>
-	<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="croissant" step="1"  name="croissant" value="0" min="0" ></td>
-	<td class="plusminus"><input type="button" onclick="increaseValue('croissant')" value="+" ></td>
-	</tr>
-	</table>
-
+		<table class="pocet">
+		<tr>
+		<td class="plusminus"><input type="button" onclick="decreaseValue('croissant')" value="-" ></td>
+		<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="croissant" step="1"  name="croissant" value="0" min="0" ></td>
+		<td class="plusminus"><input type="button" onclick="increaseValue('croissant')" value="+" ></td>
+		</tr>
+		</table>
 </div>
 
-<div class="product">             <!-- Produkt Banan -->
-
-
-	<img src="banan.jpg">
-
-	<div class="popisek">Banán</div>
-
-	<div class="cena">6 Kč</div>
-
-
-	<p>Počet</p>
-
-	<table class="pocet">
-	<tr>
-	<td class="plusminus"><input type="button" onclick="decreaseValue('banan')" value="-" ></td>
-	<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="banan" step="1"  name="menu" value="0" min="0" ></td>
-	<td class="plusminus"><input type="button" onclick="increaseValue('banan')" value="+" ></td>
-	</tr>
-	</table>
-
-</div>
 
 <div class="product">             <!-- Produkt Trancetto -->
 	<img src="trancetto.jpg">
 
 	<div class="popisek">Trancetto 28g</div>
 
-	<div class="cena"> 10 Kč</div>
+	<div class="cena"> 8 Kč</div>
 	<div class="akce">   <!-- AKční panel -->
-	Sleva 10%
+	Sleva 33%
 	</div>
 	<p>Počet</p>
 
@@ -212,10 +226,6 @@ AUTOMAT
 
 	<div class="cena">15 Kč</div>
 
-	<div class="akce">   <!-- AKční panel -->
-	Akční nabídka
-	</div>
-
 	<p>Počet</p>
 
 	<table class="pocet">
@@ -225,8 +235,8 @@ AUTOMAT
 	<td class="plusminus"><input type="button" onclick="increaseValue('margot')" value="+" ></td>
 	</tr>
 	</table>
-
 </div>
+
 
 <div class="product">             <!-- Produkt Tribit -->
 	<img src="tribit.jpg">
@@ -248,8 +258,6 @@ AUTOMAT
 
 
 <div class="product">             <!-- Produkt Coca-cola -->
-
-
 	<img src="cocacola.jpg">
 
 	<div class="popisek">Coca-cola 0,33l</div>
@@ -267,20 +275,18 @@ AUTOMAT
 	<td class="plusminus"><input type="button" onclick="increaseValue('cocacola')" value="+" ></td>
 	</tr>
 	</table>
-
-
 </div>
 
 
 <div class="product">             <!-- Produkt Sprite -->
-
-
 	<img src="sprite.jpg">
 
 	<div class="popisek">Sprite 0,33l</div>
 
-	<div class="cena">18 Kč</div>
-
+	<div class="cena">16 Kč</div>
+	<div class="novinka">   <!-- AKční panel -->
+	Novinka
+	</div>
 
 
 	<p>Počet</p>
@@ -292,19 +298,18 @@ AUTOMAT
 	<td class="plusminus"><input type="button" onclick="increaseValue('sprite')" value="+" ></td>
 	</tr>
 	</table>
-
-
 </div>
 
+
 <div class="product">             <!-- Produkt Delisssa -->
-
-
-	<img src="delissa.jpg">
+	<img src="delissa.png">
 
 	<div class="popisek">Delissa</div>
 
 	<div class="cena">6 Kč</div>
-
+	<div class="novinka">   <!-- AKční panel -->
+	Novinka
+	</div>
 
 	<p>Počet</p>
 
@@ -315,7 +320,6 @@ AUTOMAT
 	<td class="plusminus"><input type="button" onclick="increaseValue('delissa')" value="+" ></td>
 	</tr>
 	</table>
-
 </div>
 
 <div class="product">             <!-- Produkt Kofila -->
@@ -353,7 +357,6 @@ AUTOMAT
 	<td class="plusminus"><input type="button" onclick="increaseValue('snickers')" value="+" class="pocet">
 	</tr>
 	</table>
-
 </div>
 
 
@@ -363,29 +366,29 @@ AUTOMAT
 	<div class="popisek">Strážnické brambůrky 60g</div>
 
 	<div class="cena">16 Kč</div>
-<table class="varianta">
-    <tr>
-      <td class="volba">
-        <label class="radio">
-        <input type="radio" name="volba_straznicke" value="Solené" checked>
-        <span class="outer"><span class="inner"></span></span>Solené</label>
-      </td>
-      <td class="volba">
-        <label class="radio">
-        <input type="radio" name="volba_straznicke" value="Česnekové">
-        <span class="outer"><span class="inner"></span></span>Česnekové</label>
-      </td>
-    </tr>
-  </table>
-	<p>Počet</p>
+	<table class="varianta">
+	    <tr>
+	      <td class="volba">
+	        <label class="radio">
+	        <input type="radio" name="volba_straznicke" value="Solené" checked>
+	        <span class="outer"><span class="inner"></span></span>Solené</label>
+	      </td>
+	      <td class="volba">
+	        <label class="radio">
+	        <input type="radio" name="volba_straznicke" value="Česnekové">
+	        <span class="outer"><span class="inner"></span></span>Česnekové</label>
+	      </td>
+	    </tr>
+	  </table>
+		<p>Počet</p>
 
-	<table class="pocet">
-	<tr>
-	<td class="plusminus"><input type="button" onclick="decreaseValue('straznicke_bramburky')" value="-" class="pocet"></td>
-	<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="straznicke_bramburky" step="1"  name="straznicke_bramburky" value="0" min="0" class="pocet"></td>
-	<td class="plusminus"><input type="button" onclick="increaseValue('straznicke_bramburky')" value="+" class="pocet"></td>
-	</tr>
-	</table>
+		<table class="pocet">
+		<tr>
+		<td class="plusminus"><input type="button" onclick="decreaseValue('straznicke_bramburky')" value="-" class="pocet"></td>
+		<td class="pocet_input"><input type="number" placeholder="Počet" placeholder="Počet" id="straznicke_bramburky" step="1"  name="straznicke_bramburky" value="0" min="0" class="pocet"></td>
+		<td class="plusminus"><input type="button" onclick="increaseValue('straznicke_bramburky')" value="+" class="pocet"></td>
+		</tr>
+		</table>
 </div>
 
 <div class="product">             <!-- Produkt Capri-sonne -->

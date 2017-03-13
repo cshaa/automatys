@@ -51,11 +51,16 @@ $snickers_price 			= 16;
 $kofila_price 				= 14;
 $straznicke_bramburky_price = 16;
 $cocacola_price 			= 18;
-$trancetto_price			= 10;
+$trancetto_price			= 8;
 $caprisone_price			= 15;
 $menu_price					= 30;
 $croissant_price			= 12;
 
+
+$opice_price				= 28;
+$banan_price				= 6;
+$sprite_price				= 16;
+$delissa_price				= 6;
 
 $margot_input 					= $_POST['margot'];
 $tribit_input 					= $_POST['tribit'];
@@ -67,6 +72,17 @@ $cocacola_input					= $_POST['cocacola'];
 
 $trancetto_input				= $_POST['trancetto'];	
 $caprisone_input				= $_POST['caprisone'];	
+
+$opice_input					= $_POST['opice'];	
+$banan_input					= $_POST['banan'];	
+$sprite_input					= $_POST['sprite'];	
+$delissa_input					= $_POST['delissa'];	
+
+$volba_menu						= $_POST['volba_menu'];
+
+
+
+
 
 $menu_input						= $_POST['menu'];
 
@@ -82,7 +98,8 @@ $time_input		= $_POST['time'];
 $place_input	= $_POST['place'];
 $name_input		= $_POST['name'];
 
-if(!empty($margot_input) || !empty($tribit_input) || !empty($snickers_input) || !empty($kofila_input) || !empty($straznicke_bramburky_input) || !empty($cocacola_input) || !empty($menu_input) || !empty($trancetto_input) || !empty($caprisone_input) || !empty($croissant_input)){
+if(!empty($margot_input) || !empty($tribit_input) || !empty($snickers_input) || !empty($kofila_input) || !empty($straznicke_bramburky_input) || !empty($cocacola_input) || !empty($menu_input) || !empty($trancetto_input) || !empty($caprisone_input) || !empty($croissant_input ) || !empty($opice_input) || !empty($banan_input) || !empty($sprite_input) || !empty($delissa_input)){
+
 	if($time_input == "0" || $place_input == "0"){
 		echo '<p class="error"> Vyplňte platné datum nebo místo doručení</p>';
 	}else{
@@ -120,7 +137,7 @@ if(!empty($margot_input) || !empty($tribit_input) || !empty($snickers_input) || 
 			}
 
 			If($menu_input	 	> "0"){
-				$menu = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Premium menu............ ' . $menu_input	 . ' ks </p><br />';
+				$menu = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Premium menu / '.$volba_menu.'............' . $menu_input	 . ' ks </p><br />';
 				$price = $price + $menu_input	 * $menu_price ; //zde cena <<<<
 			}
 
@@ -145,6 +162,28 @@ if(!empty($margot_input) || !empty($tribit_input) || !empty($snickers_input) || 
 
 
 
+			If($opice_input	 	> "0"){
+				$opice = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Opice............ ' . $opice_input . ' ks </p><br />';
+				$price = $price + $opice_input	 * $opice_price ; //zde cena <<<<
+			}
+
+
+			If($banan_input	 	> "0"){
+				$banan = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Banán............ ' . $banan_input . ' ks </p><br />';
+				$price = $price + $banan_input		 * $banan_price	 ; //zde cena <<<<
+			}
+
+			If($sprite_input	 	> "0"){
+				$sprite = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Sprite............ ' . $sprite_input	 . ' ks </p><br />';
+				$price = $price + $sprite_input		 * $sprite_price	 ; //zde cena <<<<
+			}
+
+			If($delissa_input	 	> "0"){
+				$delissa = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Delissa............ ' . $delissa_input	 . ' ks </p><br />';
+				$price = $price + $delissa_input	 * $delissa_price ; //zde cena <<<<
+			}
+
+
 			$name 		= 	'--- --- ---<br /><p style="font-size: 13px;  margin:13px 0px 0px 10px;">Jméno přijmení........ ' . $name_input . '</p><br />';
 			$class 		= 	'--- --- ---<br /><p style="font-size: 13px;  margin:13px 0px 0px 10px;">Učebna................... ' . $place_input . '</p><br />';
 			$time 		= 	'--- --- ---<br /><p style="font-size: 13px;  margin:13px 0px 0px 10px;">Čas........................ ' . $time_input . '</p><br />';
@@ -153,17 +192,19 @@ if(!empty($margot_input) || !empty($tribit_input) || !empty($snickers_input) || 
 			$price_f 	= 	'---------------------------------------------------------------------------
 							<p style="font-size: 13px;  margin:13px 0px 0px 70px;">Celková cena.................' . $price  . ' Kč</p><br />';
 
-			$main_string = $margot.$tribit.$snickers.$kofila.$straznicke_bramburky.$cocacola.$menu.$trancetto.$caprisone.$croissant;
+			$main_string = $margot.$tribit.$snickers.$kofila.$straznicke_bramburky.$cocacola.$menu.$trancetto.$caprisone.$croissant.$opice.$banan.$sprite.$delissa ;
 			
 			if ($name_input == "666") {
 				$sender1 = 'durrer.jan+automattest@gmail.com';
 				$sender2 = 'franta.falta+automattest@gmail.com';
 				$sender3 = 'danovdk88+automattest@gmail.com';
+				$sender4 = 'michal+automattest@grno.cz';
 
 			}else{
 				$sender1 = 'durrer.jan+automat@gmail.com';
 				$sender2 = 'franta.falta+automat@gmail.com';
 				$sender3 = 'danovdk88+automat@gmail.com';
+				$sender4 = 'michal+automat@grno.cz';
 
 			}
 
@@ -172,7 +213,7 @@ if(!empty($margot_input) || !empty($tribit_input) || !empty($snickers_input) || 
 		    ->setSubject("Objednávka č.". $order_number)
 		    ->setFrom('sender@gmail.com', 'Automathys')
 		    ->setReplyTo('reply@test.com', 'Mail Bot')
-		    ->setCc(['AMBASSADOR1' => $sender2, 'AMBASSADOR2' => $sender3])
+		    ->setCc(['AMBASSADOR1' => $sender2, 'AMBASSADOR2' => $sender3, 'AMBASSADOR3' => $sender4])
 		    ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
 		    ->setHtml()
 		    ->setMessage('<strong>Objednávka č. '.$order_number.'</strong> <br />

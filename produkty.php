@@ -1,9 +1,11 @@
 
 <?php
 
-$produkty = json_decode( '{"file":'.file_get_contents("produkty.json")."}", true );
+$produkty = json_decode(
+	'{"file":'.file_get_contents("produkty.json")."}", true
+)["file"];
 
-foreach($produkty['file'] as $p){ ?>
+foreach($produkty as $p){ ?>
 
 <div class="product">
 

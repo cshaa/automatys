@@ -65,6 +65,9 @@
     $dnes = $den_v_tydnu = date("N")-1; //po=0; ne=6
     $minuta_v_dnu = date("i") + date("G")*60;
 
+		$datetime = new DateTime(); //HH (=Hack pro Honzu)
+		$datetime -> setTime(0,0);
+
     /*
       Změň časy přestávek na počítačem čitelný formát.
       Teď je $prestavky dvourozměrné pole, kde první index
@@ -112,6 +115,8 @@
       $minuta_v_dnu = 0;
       $den_v_tydnu++;
       $den_v_tydnu %= 7; // VFR neVFR, týden má 7 dní
+
+			$datetime -> modify("+ 1 day"); //HH
 
     }// konec while
 
@@ -171,8 +176,12 @@
       elseif($delta_d == 1) $text.="Zítra";
       else $text.= $dny_slovnik[ $den_v_tydnu ];
 
+			// HH
+			$datetime -> setTime(0, $prestavky[ $dalsi_prestavka ][0]);
+			$value = $datetime -> getTimestamp();
+
       // Vypiš html kód
-      ?><option value="<?=$text?>"><?=$text?></option><?php
+      ?><option value="<?=$value?>"><?=$text?></option><?php
 
       $dalsi_prestavka++;
 

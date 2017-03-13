@@ -80,7 +80,7 @@ $delissa_input					= $_POST['delissa'];
 
 $volba_menu					= $_POST['volba_menu'];
 
-
+echo 'jebat';
 
 
 
@@ -97,93 +97,130 @@ $email_input	= $_POST['email'];
 $time_input		= $_POST['time'];
 $place_input	= $_POST['place'];
 $name_input		= $_POST['name'];
-echo $menu_input;
 
 if(!empty($margot_input) || !empty($tribit_input) || !empty($snickers_input) || !empty($kofila_input) || !empty($straznicke_bramburky_input) || !empty($cocacola_input) || !empty($menu_input) || !empty($trancetto_input) || !empty($caprisone_input) || !empty($croissant_input ) || !empty($opice_input) || !empty($banan_input) || !empty($sprite_input) || !empty($delissa_input)){
 
-	if($time_input == "0" || $place_input == "0"){
+	if( $place_input == "0"){
 		echo '<p class="error"> Vyplňte platné datum nebo místo doručení</p>';
 	}else{
+// Turn off error reporting
+error_reporting(0);
 
-		require 'email/class.simple_mail.php';
+// Report runtime errors
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
+// Report all errors
+error_reporting(E_ALL);
+
+// Same as error_reporting(E_ALL);
+ini_set("error_reporting", E_ALL);
+
+// Report all errors except E_NOTICE
+error_reporting(E_ALL & ~E_NOTICE);
+		
 			If($margot_input > "0"){
 				$margot = '<p style="font-size: 13px; margin:13px 0px 0px 10px;">Margot.................... ' . $margot_input . ' ks </p><br />';
 				$price = $price + $margot_input * $margot_price; //zde cena <<<<
+				$query = 'Margot-'.$margot_input.'%';
+				$query_f = $query_f. $query;
 			}
 
 			If($tribit_input  > "0"){
 				$tribit = '<p style="font-size: 13px; margin:13px 0px 0px 10px;">Tribit...................... ' . $tribit_input . ' ks </p><br />';
 				$price = $price + $tribit_input * $tribit_price; //zde cena <<<<
+				$query = 'Tribit-'.$tribit_input.'%';
+				$query_f = $query_f. $query;
 			}
 
 			If($snickers_input > "0"){
 				$snickers = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Snickers................. ' . $snickers_input . ' ks </p><br />';
 				$price = $price + $snickers_input * $snickers_price; //zde cena <<<<
+				$query ='Snickers-'.$snickers_input.'%';
+				$query_f = $query_f .$query;
+
 			}
 
 			If($kofila_input	> "0"){
 				$kofila = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Kofila................. ' . $kofila_input . ' ks </p><br />';
 				$price = $price + $kofila_input	 * $kofila_price; //zde cena <<<<
+				$query ='Kofila-'.$kofila_input.'%';
+				$query_f = $query_f .$query;
 			}
 
 			If($straznicke_bramburky_input 	> "0"){
 				$straznicke_bramburky = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Strážnické brambůrky / '. $volba_straznicke .'............ ' . $straznicke_bramburky_input . ' ks </p><br />';
 				$price = $price + $straznicke_bramburky_input * $straznicke_bramburky_price; //zde cena <<<<
+				$query = 'Strážnické brambůrky-'.$straznicke_bramburky_input.' / '. $volba_straznicke.'%';
+				$query_f = $query_f .$query;
 			}
 
 			If($cocacola_input	 	> "0"){
 				$cocacola = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Coca Cola............ ' . $cocacola_input	 . ' ks </p><br />';
 				$price = $price + $cocacola_input	 * $cocacola_price ; //zde cena <<<<
+				$query ='Coca Cola - '.$cocacola_input.'%';
+				$query_f = $query_f .$query;
 			}
 
 			If($menu_input	 	> "0"){
 				$menu = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Premium menu / '.$volba_menu.'............' . $menu_input	 . ' ks </p><br />';
 				$price = $price + $menu_input	 * $menu_price ; //zde cena <<<<
+				$query ='Premium menu-'.$menu_input.' / '. $volba_menu.'%';
+				$query_f = $query_f .$query;
 			}
 
 			If($trancetto_input	 	> "0"){
 				$trancetto = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Trancetto............ ' . $trancetto_input	 . ' ks </p><br />';
 				$price = $price + $trancetto_input	 * $trancetto_price ; //zde cena <<<<
+				$query ='Trancetto-'.$trancetto_input.'%';
+				$query_f = $query_f .$query;	
 			}
 
 			If($caprisone_input	 	> "0"){
 				$caprisone = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Caprisone / '.$volba_capri .' ............ ' . $caprisone_input	 . ' ks </p><br />';
 				$price = $price + $caprisone_input	 * $caprisone_price ; //zde cena <<<<
+				$query = 'Caprisonne-'.$caprisone_input.' / '. $volba_capri.'%';
+				$query_f = $query_f .$query;
 			}
 
 
 			If($croissant_input	 	> "0"){
 				$croissant = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Croissant / '.$volba_croissant .' ............ ' . $croissant_input	 . ' ks </p><br />';
 				$price = $price + $croissant_input	 * $croissant_price ; //zde cena <<<<
+				$query = 'Croissant-'.$croissant_input.' / '. $volba_croissant.'%';
+				$query_f = $query_f. $query;
 			}
-
-
-
-
 
 
 			If($opice_input	 	> "0"){
 				$opice = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Opice............ ' . $opice_input . ' ks </p><br />';
 				$price = $price + $opice_input	 * $opice_price ; //zde cena <<<<
+				$query = 'Opice-'.$opice_input.'%';	
+				$query_f = $query_f .$query;
 			}
 
 
 			If($banan_input	 	> "0"){
 				$banan = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Banán............ ' . $banan_input . ' ks </p><br />';
 				$price = $price + $banan_input		 * $banan_price	 ; //zde cena <<<<
+				$query = 'Banán-'.$banan_input.'%';
+				$query_f = $query_f. $query;	
 			}
 
 			If($sprite_input	 	> "0"){
 				$sprite = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Sprite............ ' . $sprite_input	 . ' ks </p><br />';
 				$price = $price + $sprite_input		 * $sprite_price	 ; //zde cena <<<<
+				$query = 'Sprite-'. $sprite_input.'%';	
+				$query_f = $query_f .$query;
 			}
 
 			If($delissa_input	 	> "0"){
 				$delissa = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Delissa............ ' . $delissa_input	 . ' ks </p><br />';
 				$price = $price + $delissa_input	 * $delissa_price ; //zde cena <<<<
+				$query = 'Delissa-'. $delissa_input.'%';	
+				$query_f = $query_f .$query ;
 			}
 
+echo $query_f;
 
 			$name 		= 	'--- --- ---<br /><p style="font-size: 13px;  margin:13px 0px 0px 10px;">Jméno přijmení........ ' . $name_input . '</p><br />';
 			$class 		= 	'--- --- ---<br /><p style="font-size: 13px;  margin:13px 0px 0px 10px;">Učebna................... ' . $place_input . '</p><br />';
@@ -209,24 +246,29 @@ if(!empty($margot_input) || !empty($tribit_input) || !empty($snickers_input) || 
 
 			}
 
-		$mail = SimpleMail::make()
-		    ->setTo($sender1, 'AMBASSADOR')
-		    ->setSubject("Objednávka č.". $order_number)
-		    ->setFrom('sender@gmail.com', 'Automathys')
-		    ->setReplyTo('reply@test.com', 'Mail Bot')
-		    ->setCc(['AMBASSADOR1' => $sender2, 'AMBASSADOR2' => $sender3, 'AMBASSADOR3' => $sender4])
-		    ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
-		    ->setHtml()
-		    ->setMessage('<strong>Objednávka č. '.$order_number.'</strong> <br />
-		    				<br />
-		    				'.$main_string.$name.$class.$time.$email.$price_f)
-		    ->setWrap(78);
-		$send = $mail->send();
+
+require'../connect.inc.php';
+
+$sql = "INSERT INTO Objednavky (true_id,name, email, product, time, place, price, done) VALUES ('$order_number', '$name_input', '$email_input','$query_f','$time_input ','$place_input ','$price',FALSE)";
+if(mysqli_query($mysqli, $sql)){
+
+    echo "Records inserted successfully.";
+
+} else{
+
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+
+}
+
+echo mysqli_error ( $mysqli );
+
+// Close connection
+
+mysqli_close($link);
 
 
 			if ($send) {
-	    		echo '<script type="text/javascript">location.replace("thanks.php?t='.$time_input.'&err='.$err.'&p='.$price.'");</script>';
-
+	    	
 			} else {
 	    		echo '<p class="error">Problém s potvrzením objednávky</p>';
 

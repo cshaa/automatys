@@ -1,0 +1,109 @@
+[
+
+{
+  "id":    "opice",
+  "jmeno": "Opičí sezóna",
+  "cena":  28,
+  "akce":  "Akce do 14. 3.",
+  "img":   "opice.png"
+},
+
+{
+  "id":    "banan",
+  "jmeno": "Banán",
+  "cena":  6,
+  "akce":  "Akce do 14. 3.",
+  "img":   "banan.jpg"
+},
+
+{
+  "id":    "menu",
+  "jmeno": "Premium menu",
+  "cena":  30,
+  "img":   "cola_bramburky.png",
+  "volba": ["Coca Cola", "Sprite"]
+},
+
+{
+  "id":    "croissant",
+  "jmeno": "7Days Croissant double",
+  "cena":  12,
+  "img":   "croissant.png",
+  "volba": ["Kakao – kokos", "Vanilka – višeň"]
+},
+
+{
+  "id":    "trancetto",
+  "jmeno": "Trancetto 28g",
+  "cena":  8,
+  "img":   "trancetto.jpg",
+  "akce":  "Sleva 33%"
+},
+
+{
+  "id":    "margot",
+  "jmeno": "Margot 100g",
+  "cena":  15,
+  "img":   "margot.jpg"
+},
+
+{
+  "id":    "tribit",
+  "jmeno": "Tribit 46g",
+  "cena":  15,
+  "img":   "tribit.jpg"
+},
+
+{
+  "id":    "cocacola",
+  "jmeno": "Coca-Cola 0,33l",
+  "cena":  18,
+  "img":   "cocacola.jpg"
+},
+
+{
+  "id":    "sprite",
+  "jmeno": "Sprite 0,33l",
+  "cena":  16,
+  "img":   "sprite.jpg"
+},
+
+{
+  "id":    "delissa",
+  "jmeno": "Delissa 33g",
+  "cena":  6,
+  "img":   "delissa.png",
+  "novinka": true
+},
+
+{
+  "id":    "kofila",
+  "jmeno": "Kofila 45g",
+  "cena":  14,
+  "img":   "kofila.jpg"
+},
+
+{
+  "id":    "snickers",
+  "jmeno": "Snickers 50g",
+  "cena":  16,
+  "img":   "snickers.jpg"
+},
+
+{
+  "id":    "straznicke",
+  "jmeno": "Strážnické brambůrky 60g",
+  "cena":  16,
+  "img":   "straznicke.png",
+  "volba": ["Solené", "Česnekové"]
+},
+
+{
+  "id":    "caprisone",
+  "jmeno": "Capri-Sonne 0,2l",
+  "cena":  15,
+  "img":   "caprisone.png",
+  "volba": ["Pomeranč", "Multivitamín"]
+}
+
+]

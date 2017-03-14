@@ -69,7 +69,7 @@ AUTOMAT
 </header>
 
 <div class="notification">
-Prodloužili jsme pro Vás otvírací dobu!
+Prodloužili jsme pro Vás otevírací dobu!
 </div>
 
 

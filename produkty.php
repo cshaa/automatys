@@ -3,7 +3,7 @@
 
 $produkty = json_decode(
 	'{"file":'.file_get_contents("produkty.json")."}", true
-)["file"];
+)['file'];
 
 foreach($produkty as $p){ ?>
 

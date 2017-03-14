@@ -50,6 +50,7 @@ $produkty = json_decode(
 )["file"];
 
 $objednavka = time();
+$unique_id = bin2hex(random_bytes(16));
 $text = "<strong>Objednávka č. $objednavka</strong><br /><br />";
 $cena = 0;
 
@@ -97,7 +98,7 @@ foreach( $produkty as $p ){
 		if( isset($_POST['volba_'.$id]) ){
 			$volba = $_POST['volba_'.$id];
 			$jmeno .= " ($volba)";
-			$qid   .= "$/$volba";
+			$qid   .= "/$volba";
 		}
 
 		$text .= napis_radek( $jmeno,  $pocet.' ks' );
@@ -166,15 +167,41 @@ else{
 
 
 		if ($send) {
-    		echo '<script type="text/javascript">location.replace("thanks.php?t='.$cas.'&p='.$cena.'");</script>';
+    		echo "<script type='text/javascript'>location.replace('user/?id=$unique_id');</script>";
 
 
-				// Zde bude Honzův kód
+				// Zde je Honzův kód
 				$query = join(";",$query);
+				$date_processing = date("dmY",$timestamp);
 				/*
 					Teď je $query ve formátu:
 					id1@pocet1;id2/varianta@pocet2
 				*/
+
+				require'connect.inc.php';
+
+				$sql = "INSERT INTO Objednavky (
+					true_id, unique_key, date_processing, name, email, product,
+					time_delivery, place, price, done, storno, spam)
+					VALUES ('$objednavka', '$unique_id', '$date_processing',
+						'$student', '$email','$query','$timestamp','$misto ',
+						'$cena',FALSE,FALSE,FALSE)";
+
+				if(mysqli_query($mysqli, $sql)){
+
+				    echo "Records inserted successfully.";
+
+				} else{
+
+				    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+
+				}
+
+				echo mysqli_error ( $mysqli );
+
+				// Close connection
+
+				mysqli_close($link);
 
 
 

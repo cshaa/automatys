@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -70,13 +70,13 @@ $kofila_input					= $_POST['kofila'];
 $straznicke_bramburky_input 	= $_POST['straznicke_bramburky'];
 $cocacola_input					= $_POST['cocacola'];
 
-$trancetto_input				= $_POST['trancetto'];	
-$caprisone_input				= $_POST['caprisone'];	
+$trancetto_input				= $_POST['trancetto'];
+$caprisone_input				= $_POST['caprisone'];
 
-$opice_input					= $_POST['opice'];	
-$banan_input					= $_POST['banan'];	
-$sprite_input					= $_POST['sprite'];	
-$delissa_input					= $_POST['delissa'];	
+$opice_input					= $_POST['opice'];
+$banan_input					= $_POST['banan'];
+$sprite_input					= $_POST['sprite'];
+$delissa_input					= $_POST['delissa'];
 
 $volba_menu					= $_POST['volba_menu'];
 
@@ -117,7 +117,7 @@ ini_set("error_reporting", E_ALL);
 
 // Report all errors except E_NOTICE
 error_reporting(E_ALL & ~E_NOTICE);
-		
+
 			If($margot_input > "0"){
 				$margot = '<p style="font-size: 13px; margin:13px 0px 0px 10px;">Margot.................... ' . $margot_input . ' ks </p><br />';
 				$price = $price + $margot_input * $margot_price; //zde cena <<<<
@@ -172,7 +172,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 				$trancetto = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Trancetto............ ' . $trancetto_input	 . ' ks </p><br />';
 				$price = $price + $trancetto_input	 * $trancetto_price ; //zde cena <<<<
 				$query ='Trancetto-'.$trancetto_input.'%';
-				$query_f = $query_f .$query;	
+				$query_f = $query_f .$query;
 			}
 
 			If($caprisone_input	 	> "0"){
@@ -194,7 +194,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 			If($opice_input	 	> "0"){
 				$opice = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Opice............ ' . $opice_input . ' ks </p><br />';
 				$price = $price + $opice_input	 * $opice_price ; //zde cena <<<<
-				$query = 'Opice-'.$opice_input.'%';	
+				$query = 'Opice-'.$opice_input.'%';
 				$query_f = $query_f .$query;
 			}
 
@@ -203,20 +203,20 @@ error_reporting(E_ALL & ~E_NOTICE);
 				$banan = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Banán............ ' . $banan_input . ' ks </p><br />';
 				$price = $price + $banan_input		 * $banan_price	 ; //zde cena <<<<
 				$query = 'Banán-'.$banan_input.'%';
-				$query_f = $query_f. $query;	
+				$query_f = $query_f. $query;
 			}
 
 			If($sprite_input	 	> "0"){
 				$sprite = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Sprite............ ' . $sprite_input	 . ' ks </p><br />';
 				$price = $price + $sprite_input		 * $sprite_price	 ; //zde cena <<<<
-				$query = 'Sprite-'. $sprite_input.'%';	
+				$query = 'Sprite-'. $sprite_input.'%';
 				$query_f = $query_f .$query;
 			}
 
 			If($delissa_input	 	> "0"){
 				$delissa = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Delissa............ ' . $delissa_input	 . ' ks </p><br />';
 				$price = $price + $delissa_input	 * $delissa_price ; //zde cena <<<<
-				$query = 'Delissa-'. $delissa_input.'%';	
+				$query = 'Delissa-'. $delissa_input.'%';
 				$query_f = $query_f .$query ;
 			}
 
@@ -231,7 +231,7 @@ echo $query_f;
 							<p style="font-size: 13px;  margin:13px 0px 0px 70px;">Celková cena.................' . $price  . ' Kč</p><br />';
 
 			$main_string = $margot.$tribit.$snickers.$kofila.$straznicke_bramburky.$cocacola.$menu.$trancetto.$caprisone.$croissant.$opice.$banan.$sprite.$delissa ;
-			
+
 			if ($name_input == "666") {
 				$sender1 = 'durrer.jan+automattest@gmail.com';
 				$sender2 = 'franta.falta+automattest@gmail.com';
@@ -268,7 +268,7 @@ mysqli_close($link);
 
 
 			if ($send) {
-	    	
+
 			} else {
 	    		echo '<p class="error">Problém s potvrzením objednávky</p>';
 

@@ -3,6 +3,7 @@
 {
   "id":    "opice",
   "jmeno": "Opičí sezóna",
+  "detail": "Banán + Croissant + Capri-Sonne",
   "cena":  28,
   "akce":  "Akce do 14. 3.",
   "img":   "opice.png"
@@ -25,9 +26,17 @@
 },
 
 {
+  "id":    "veselakrava",
+  "jmeno": "Sýr a křup 35g",
+  "cena":  16,
+  "img":   "veselakrava.jpg",
+  "novinka": true
+},
+
+{
   "id":    "croissant",
   "jmeno": "7Days Croissant double",
-  "cena":  12,
+  "cena":  15,
   "img":   "croissant.png",
   "volba": ["Kakao – kokos", "Vanilka – višeň"]
 },

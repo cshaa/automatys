@@ -14,12 +14,20 @@
 	a{
 		margin-left: 20px;
 		margin-right: 10px;
-		font-size: 3em;
+		font-size: 130%;
+	}
+	.link{
+		margin-top: 30px;
+	    padding-bottom: 14px;
+	    list-style: none;
 	}
 
 
 </style>
 <?php
+$fail 	= 0;
+$trzba 	= 0;
+$done	= 0;
 
 $json = json_decode(
 	'{"file":'.file_get_contents("../produkty.json")."}", true
@@ -31,10 +39,10 @@ if($_GET['heslo'] == "kokot123"){
 require '../connect.inc.php';
 	if($_GET['date'] == dnes){
 		$date = date("dmY");
-		$sql = "SELECT * FROM Objednavky WHERE date_processing = '$date' ORDER BY done,time_delivery";
+		$sql = "SELECT * FROM Objednavky WHERE date_processing = '$date' ORDER BY storno, done ASC,time_delivery ASC,place ";
 	}elseif ($_GET['date'] == zítra) {
 		$dt = date('dmY', strtotime(' +1 day'));
-		$sql = "SELECT * FROM Objednavky WHERE date_processing = '$dt' ORDER BY time_delivery";
+		$sql = "SELECT * FROM Objednavky WHERE date_processing = '$dt' ORDER BY storno, done ASC,time_delivery ASC,place";
 	}elseif (!empty($_GET['date'])) {
 		$date = $_GET['date'];
 		$sql = "SELECT * FROM Objednavky WHERE date_processing = '$date' ORDER BY time_delivery";
@@ -47,7 +55,7 @@ require '../connect.inc.php';
 	if ($result->num_rows > 0) {
     	while($row = $result->fetch_assoc()) {
         	if ($row["spam"]==0) {
-        		if($row["done"] == 1){$color="green";$done++;$trzba+=$row["price"];}else{$color="red";$fail++;}
+        		if($row["done"] == 1){$color="green";$done++;$trzba+=$row["price"];}elseif($row["done"] == 0 && $row["storno"] == 0){$color="red";$fail++;}
 		    		if ($row["storno"] == 1){$color="grey";}
 		    		if ($row["name"] == 666){$color="pink";}
 					echo '<ul style="background:'.$color.';">';
@@ -79,7 +87,9 @@ require '../connect.inc.php';
         			}
         			//zde parsovat json
 	       			echo "</ul>";
+	        		echo '<li class="link">';
 	        		echo '<a href="del.php?a=1&id='.$row["unique_key"].'">VYŘÍZENO</a><a href="del.php?a=0&id='.$row["unique_key"].'">NEVYŘÍZENO</a><a href="del.php?a=3&id='.$row["unique_key"].'">SPAM</a>';
+	        		echo "</li>";
         			echo "</ul>";
         	}
     	}

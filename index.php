@@ -45,6 +45,13 @@ function decreaseValue(a)
     }
     document.getElementById(a).value = value;
 }
+
+function promoReveal(e){
+  e.target.classList.add("hidden");
+  var p = document.getElementById('promokod');
+  p.classList.remove("hidden");
+  p.focus();
+}
 </script>
 </head>
 <body>
@@ -124,6 +131,9 @@ include "produkty.php";
 
 
 <p><input id="zakoupit" type="submit" value="Zakoupit"></p>
+
+<p id="promoReveal" onclick=promoReveal(event)>Vložit promo kód</p>
+<input type="text" id=promokod name="promokod" placeholder="Promo kód" class=hidden />
 
 
 </form>

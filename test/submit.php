@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 
@@ -43,242 +43,216 @@
 <div id="hlaska">
 
 <?php
-$order_number = time();
 
-$margot_price 				= 15;
-$tribit_price 				= 15;
-$snickers_price 			= 16;
-$kofila_price 				= 14;
-$straznicke_bramburky_price = 16;
-$cocacola_price 			= 18;
-$trancetto_price			= 8;
-$caprisone_price			= 15;
-$menu_price					= 30;
-$croissant_price			= 12;
+// Načti naše produkty z jsonu
+$produkty = json_decode(
+	'{"file":'.file_get_contents("produkty.json")."}", true
+)["file"];
 
+$objednavka = time();
+$unique_id = bin2hex(random_bytes(16));
+$text = "<strong>Objednávka č. $objednavka</strong><br /><br />";
+$cena = 0;
 
-$opice_price				= 28;
-$banan_price				= 6;
-$sprite_price				= 16;
-$delissa_price				= 6;
+$student   = $_POST['name'];
+$email     = $_POST['email'];
+$timestamp = $_POST['time'];
+$misto     = $_POST['place'];
 
-$margot_input 					= $_POST['margot'];
-$tribit_input 					= $_POST['tribit'];
-$snickers_input					= $_POST['snickers'];
+// Nejdřív zformátuj čas
+$cas = date("G:i / j. n. Y",$timestamp);
 
-$kofila_input					= $_POST['kofila'];
-$straznicke_bramburky_input 	= $_POST['straznicke_bramburky'];
-$cocacola_input					= $_POST['cocacola'];
-
-$trancetto_input				= $_POST['trancetto'];
-$caprisone_input				= $_POST['caprisone'];
-
-$opice_input					= $_POST['opice'];
-$banan_input					= $_POST['banan'];
-$sprite_input					= $_POST['sprite'];
-$delissa_input					= $_POST['delissa'];
-
-$volba_menu					= $_POST['volba_menu'];
-
-echo 'jebat';
+// Tahle věc přijde uložit do DB
+$query = [];
 
 
 
-$menu_input						= $_POST['menu'];
+/*
+	Usnadňuje formátování mailu
+*/
+$hr = str_repeat('-',30).'<br />';
 
-$volba_capri 					= $_POST['volba_capri'];
-
-$croissant_input				= $_POST['croissant'];
-$volba_croissant				= $_POST['volba_croissant'];
-$volba_straznicke				= $_POST['volba_straznicke'];
-
-
-$email_input	= $_POST['email'];
-$time_input		= $_POST['time'];
-$place_input	= $_POST['place'];
-$name_input		= $_POST['name'];
-
-if(!empty($margot_input) || !empty($tribit_input) || !empty($snickers_input) || !empty($kofila_input) || !empty($straznicke_bramburky_input) || !empty($cocacola_input) || !empty($menu_input) || !empty($trancetto_input) || !empty($caprisone_input) || !empty($croissant_input ) || !empty($opice_input) || !empty($banan_input) || !empty($sprite_input) || !empty($delissa_input)){
-
-	if( $place_input == "0"){
-		echo '<p class="error"> Vyplňte platné datum nebo místo doručení</p>';
-	}else{
-// Turn off error reporting
-error_reporting(0);
-
-// Report runtime errors
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
-
-// Report all errors
-error_reporting(E_ALL);
-
-// Same as error_reporting(E_ALL);
-ini_set("error_reporting", E_ALL);
-
-// Report all errors except E_NOTICE
-error_reporting(E_ALL & ~E_NOTICE);
-
-			If($margot_input > "0"){
-				$margot = '<p style="font-size: 13px; margin:13px 0px 0px 10px;">Margot.................... ' . $margot_input . ' ks </p><br />';
-				$price = $price + $margot_input * $margot_price; //zde cena <<<<
-				$query = 'Margot-'.$margot_input.'%';
-				$query_f = $query_f. $query;
-			}
-
-			If($tribit_input  > "0"){
-				$tribit = '<p style="font-size: 13px; margin:13px 0px 0px 10px;">Tribit...................... ' . $tribit_input . ' ks </p><br />';
-				$price = $price + $tribit_input * $tribit_price; //zde cena <<<<
-				$query = 'Tribit-'.$tribit_input.'%';
-				$query_f = $query_f. $query;
-			}
-
-			If($snickers_input > "0"){
-				$snickers = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Snickers................. ' . $snickers_input . ' ks </p><br />';
-				$price = $price + $snickers_input * $snickers_price; //zde cena <<<<
-				$query ='Snickers-'.$snickers_input.'%';
-				$query_f = $query_f .$query;
-
-			}
-
-			If($kofila_input	> "0"){
-				$kofila = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Kofila................. ' . $kofila_input . ' ks </p><br />';
-				$price = $price + $kofila_input	 * $kofila_price; //zde cena <<<<
-				$query ='Kofila-'.$kofila_input.'%';
-				$query_f = $query_f .$query;
-			}
-
-			If($straznicke_bramburky_input 	> "0"){
-				$straznicke_bramburky = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Strážnické brambůrky / '. $volba_straznicke .'............ ' . $straznicke_bramburky_input . ' ks </p><br />';
-				$price = $price + $straznicke_bramburky_input * $straznicke_bramburky_price; //zde cena <<<<
-				$query = 'Strážnické brambůrky-'.$straznicke_bramburky_input.' / '. $volba_straznicke.'%';
-				$query_f = $query_f .$query;
-			}
-
-			If($cocacola_input	 	> "0"){
-				$cocacola = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Coca Cola............ ' . $cocacola_input	 . ' ks </p><br />';
-				$price = $price + $cocacola_input	 * $cocacola_price ; //zde cena <<<<
-				$query ='Coca Cola - '.$cocacola_input.'%';
-				$query_f = $query_f .$query;
-			}
-
-			If($menu_input	 	> "0"){
-				$menu = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Premium menu / '.$volba_menu.'............' . $menu_input	 . ' ks </p><br />';
-				$price = $price + $menu_input	 * $menu_price ; //zde cena <<<<
-				$query ='Premium menu-'.$menu_input.' / '. $volba_menu.'%';
-				$query_f = $query_f .$query;
-			}
-
-			If($trancetto_input	 	> "0"){
-				$trancetto = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Trancetto............ ' . $trancetto_input	 . ' ks </p><br />';
-				$price = $price + $trancetto_input	 * $trancetto_price ; //zde cena <<<<
-				$query ='Trancetto-'.$trancetto_input.'%';
-				$query_f = $query_f .$query;
-			}
-
-			If($caprisone_input	 	> "0"){
-				$caprisone = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Caprisone / '.$volba_capri .' ............ ' . $caprisone_input	 . ' ks </p><br />';
-				$price = $price + $caprisone_input	 * $caprisone_price ; //zde cena <<<<
-				$query = 'Caprisonne-'.$caprisone_input.' / '. $volba_capri.'%';
-				$query_f = $query_f .$query;
-			}
+function napis_radek($a,$b){
+	$text = '<p style="font-size: 13px; font-family: monospace; margin:13px 0px 0px 10px;">';
+	$text .= str_pad( $a, 50-strlen( $b ), ".");
+	$text .= $b.'</p><br />';
+	return $text;
+}
 
 
-			If($croissant_input	 	> "0"){
-				$croissant = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Croissant / '.$volba_croissant .' ............ ' . $croissant_input	 . ' ks </p><br />';
-				$price = $price + $croissant_input	 * $croissant_price ; //zde cena <<<<
-				$query = 'Croissant-'.$croissant_input.' / '. $volba_croissant.'%';
-				$query_f = $query_f. $query;
-			}
 
+/*
+	Projeď všechny naše produkty a ty z nich,
+	které jsou objednané započítej.
+*/
+foreach( $produkty as $p ){
+	$id = $p['id'];
+	$pocet = +$_POST[$id];
 
-			If($opice_input	 	> "0"){
-				$opice = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Opice............ ' . $opice_input . ' ks </p><br />';
-				$price = $price + $opice_input	 * $opice_price ; //zde cena <<<<
-				$query = 'Opice-'.$opice_input.'%';
-				$query_f = $query_f .$query;
-			}
+	// Pokud si uživatel objednal aspoň 1x
+	if( $pocet > 0){
+		$jmeno = $p['jmeno'];
+		$qid = $id;
 
+		// Existuje volba?
+		if( isset($_POST['volba_'.$id]) ){
+			$volba = $_POST['volba_'.$id];
+			$jmeno .= " ($volba)";
+			$qid   .= "/$volba";
+		}
 
-			If($banan_input	 	> "0"){
-				$banan = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Banán............ ' . $banan_input . ' ks </p><br />';
-				$price = $price + $banan_input		 * $banan_price	 ; //zde cena <<<<
-				$query = 'Banán-'.$banan_input.'%';
-				$query_f = $query_f. $query;
-			}
-
-			If($sprite_input	 	> "0"){
-				$sprite = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Sprite............ ' . $sprite_input	 . ' ks </p><br />';
-				$price = $price + $sprite_input		 * $sprite_price	 ; //zde cena <<<<
-				$query = 'Sprite-'. $sprite_input.'%';
-				$query_f = $query_f .$query;
-			}
-
-			If($delissa_input	 	> "0"){
-				$delissa = '<p style="font-size: 13px;  margin:13px 0px 0px 10px;">Delissa............ ' . $delissa_input	 . ' ks </p><br />';
-				$price = $price + $delissa_input	 * $delissa_price ; //zde cena <<<<
-				$query = 'Delissa-'. $delissa_input.'%';
-				$query_f = $query_f .$query ;
-			}
-
-echo $query_f;
-
-			$name 		= 	'--- --- ---<br /><p style="font-size: 13px;  margin:13px 0px 0px 10px;">Jméno přijmení........ ' . $name_input . '</p><br />';
-			$class 		= 	'--- --- ---<br /><p style="font-size: 13px;  margin:13px 0px 0px 10px;">Učebna................... ' . $place_input . '</p><br />';
-			$time 		= 	'--- --- ---<br /><p style="font-size: 13px;  margin:13px 0px 0px 10px;">Čas........................ ' . $time_input . '</p><br />';
-			$email 		= 	'--- --- ---<br /><p style="font-size: 13px;  margin:13px 0px 0px 10px;">Email..................... ' . $email_input . '</p><br />';
-
-			$price_f 	= 	'---------------------------------------------------------------------------
-							<p style="font-size: 13px;  margin:13px 0px 0px 70px;">Celková cena.................' . $price  . ' Kč</p><br />';
-
-			$main_string = $margot.$tribit.$snickers.$kofila.$straznicke_bramburky.$cocacola.$menu.$trancetto.$caprisone.$croissant.$opice.$banan.$sprite.$delissa ;
-
-			if ($name_input == "666") {
-				$sender1 = 'durrer.jan+automattest@gmail.com';
-				$sender2 = 'franta.falta+automattest@gmail.com';
-				$sender3 = 'danovdk88+automattest@gmail.com';
-				$sender4 = 'michal+automattest@grno.cz';
-
-			}else{
-				$sender1 = 'durrer.jan+automat@gmail.com';
-				$sender2 = 'franta.falta+automat@gmail.com';
-				$sender3 = 'danovdk88+automat@gmail.com';
-				$sender4 = 'michal+automat@grno.cz';
-
-			}
-
-
-require'../connect.inc.php';
-
-$sql = "INSERT INTO Objednavky (true_id,name, email, product, time, place, price, done) VALUES ('$order_number', '$name_input', '$email_input','$query_f','$time_input ','$place_input ','$price',FALSE)";
-if(mysqli_query($mysqli, $sql)){
-
-    echo "Records inserted successfully.";
-
-} else{
-
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+		$text .= napis_radek( $jmeno,  $pocet.' ks' );
+		$cena += $pocet * $p['cena'];
+		$query[] = $qid."@".$pocet;
+	}
 
 }
 
-echo mysqli_error ( $mysqli );
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ↓
+If(isset($_POST['promokod']) && !empty($_POST['promokod'])){
+	$promo = $_POST['promokod'];
+	require 'connect.inc.php';
+	$sql_1 = "SELECT * FROM Promo_codes WHERE unique_key = '$promo'";
+	$result =  $mysqli->query($sql_1);
+	If($result->num_rows != 1){
+		$promokod_validity = "InValid";
+	}elseif ($result->num_rows == 1) {
+		while($row = $result->fetch_assoc()) {
+			if ($row['validity'] == 0) {
+				$promokod_validity = "Used";
+			}else{
+				$promokod_validity = "Valid";
 
-// Close connection
+				$promo_msg 		= $row['text'];
+				If($row['discount'] > 0){
+					$promokod_validity = "Valid_discount";
+					$price_puvodni = $cena;
+					$cena = $cena - (($cena/100)*$row['discount']);
+					$promo_msg = $promo_msg." (". "Sleva ". $row['discount']." %)";
 
-mysqli_close($link);
-
-
-			if ($send) {
-
-			} else {
-	    		echo '<p class="error">Problém s potvrzením objednávky</p>';
-
+					$sql_00 = "UPDATE Promo_codes SET validity=0 WHERE unique_key='$promo'";
+					$mysqli->query($sql_00);
+				}		
 			}
+		}
+	}
+}else{
+	$promo_msg = "NE";
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ↑
+
+
+
+/*
+	Pokud nebylo vybráno žádné zboží, třída nebo čas.
+*/
+if( $cena == 0 )
+	echo '<p class="error">Vyberte nějaké zboží</p>';
+
+elseif( $timestamp == "0" || $misto == "0" )
+
+	echo '<p class="error">Vyplňte platné datum a místo doručení</p>';
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ↓
+elseif($promokod_validity == "InValid")
+	echo '<p class="error">Neexistující promo kód</p>';
+
+elseif($promokod_validity == "Used")
+	echo '<p class="error">Již použitý promo kód</p>';
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ↑
+/*
+	Všechno v cajku, objednej!
+*/
+else{
+
+	require '../email/class.simple_mail.php';
+
+	$text .= $hr;
+	$text .= napis_radek('Jméno a přijmení',$student);
+	$text .= napis_radek('Email',           $email  );
+	$text .= napis_radek('Učebna',          $misto  );
+	$text .= napis_radek('Čas',             $cas    );
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ↓
+	$text .= napis_radek('Promo kód',    	$promo_msg);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ↑
+	$text .= $hr;
+	$text .= napis_radek('Celková cena',    $cena   );
+
+	if ($student == "666") {
+		$machine = 'Test';
+		$from = 'bigymat+test@email.cz';
+		$sender1 = 'durrer.jan+automattest@gmail.com';
+		$sender2 = 'franta.falta+automattest@gmail.com';
+		$sender3 = 'danovdk88+automattest@gmail.com';
+		$sender4 = 'michal+automattest@grno.cz';
+
+	} else {
+		$machine = 'Bigymat';
+		$from = 'bigymat@email.cz';
+		$sender1 = 'durrer.jan+automat@gmail.com';
+		$sender2 = 'franta.falta+automat@gmail.com';
+		$sender3 = 'danovdk88+automat@gmail.com';
+		$sender4 = 'michal+automat@grno.cz';
+	}
+
+	$mail = SimpleMail::make()
+		    ->setTo($sender1, 'AMBASSADOR')
+		    ->setSubject("Objednávka č.". $objednavka)
+		    ->setFrom($from, $machine)
+		    ->setReplyTo('bigymat@email.cz', 'Bigymat')
+		    ->setCc(['AMBASSADOR1' => $sender2, 'AMBASSADOR2' => $sender3, 'AMBASSADOR3' => $sender4])
+		    ->addGenericHeader('X-Mailer', 'PHP/' . phpversion())
+		    ->setHtml()
+		    ->setMessage($text)
+		    ->setWrap(78);
+
+		$send = $mail->send();
+
+
+		if ($send) {
+    		echo "<script type='text/javascript'>location.replace('user/?id=$unique_id');</script>";
+
+
+				// Zde je Honzův kód
+				$query = join(";",$query);
+				$date_processing = date("dmY",$timestamp);
+				/*
+					Teď je $query ve formátu:
+					id1@pocet1;id2/varianta@pocet2
+				*/
+
+				require'connect.inc.php';
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ↓
+				$sql = "INSERT INTO Objednavky (
+					true_id, unique_key, date_processing, name, email, product,
+					time_delivery, place,price_puvodni, price,promo_code,promo_msg, done, storno, spam)
+					VALUES ('$objednavka', '$unique_id', '$date_processing',
+						'$student', '$email','$query','$timestamp','$misto ','$price_puvodni',
+						'$cena','$promo','$promo_msg',FALSE,FALSE,FALSE)";
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ↑
+				if(mysqli_query($mysqli, $sql)){
+
+				    echo "Records inserted successfully.";
+
+				} else{
+
+				    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+
+				}
+
+				echo mysqli_error ( $mysqli );
+
+				// Close connection
+
+				mysqli_close($link);
+
+
+
+		} else {
+    		echo '<p class="error">Problém s potvrzením objednávky</p>';
+		}
 
 	}
 
-}else{
-	 echo '<p class="error">Vyberte nějaké zboží</p>';
-}
 
 ?>
 
@@ -292,6 +266,6 @@ mysqli_close($link);
 
 </div>
 
-<iframe class="add"><endora></iframe>
+<iframe class="ad"><endora></iframe>
 </body>
 </html>

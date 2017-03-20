@@ -1,25 +1,25 @@
 [
 
-
-
 {
-  "id":    "love_story",
-  "jmeno": "Love story",
-  "cena":  50,
-  "img":   "lovestory.png",
-  "akce": "Akce",
-  "detail": "Milka + 2x Coca-cola"
+  "id":    "sampion",
+  "jmeno": "Menu šampiónů",
+  "cena":  58,
+  "img":   "/img/sampion.png",
+  "volba": ["Solené", "Česnekové"],
+  "novinka": true,
+  "detail": "Bake Rolls + Red Bull"
 },
 
 {
-  "id":    "musli",
-  "jmeno": "Müsli na lásku",
-  "cena":  27,
-  "img":   "musli.png",
-  "akce": "Akce",
-  "detail": "Müsli srdíčka + Capri-Sonne pomeranč",
-  "volba": ["Papája", "Čokoláda"]
+  "id":    "fitness",
+  "jmeno": "Fitness menu",
+  "cena":  30,
+  "img":   "/img/fitness.png",
+  "volba": ["Perlivá voda", "Neperlivá voda"],
+  "novinka": true,
+  "detail": "Corny Big - banán s čokoládou + jalbko + voda"
 },
+
 
 {
   "id":    "menu",
@@ -29,16 +29,30 @@
   "volba": ["Coca-Cola", "Sprite"]
 },
 
-
 {
   "id":    "redbull",
   "jmeno": "Red Bull",
   "cena":  39,
-  "img":   "redbull.png",
-  "novinka": true
+  "img":   "redbull.png"
 },
 
+{
+  "id":    "milka",
+  "jmeno": "Milka Triple",
+  "cena":  39,
+  "img":   "/img/milka.png",
+  "novinka": true,
+  "volba": ["á la Caramel","Choco Kakao"]
+},
 
+{
+  "id":    "croissant_normal",
+  "jmeno": "7Days Croissant",
+  "detail": "Kakaový",
+  "cena":  17,
+  "img":   "croissant.jpg",
+  "novinka": true
+},
 
 
 {
@@ -57,8 +71,6 @@
   "detail": "kakao - kokos"
 },
 
-
-
 {
   "id":    "trancetto",
   "jmeno": "Trancetto 28g",
@@ -72,6 +84,13 @@
   "jmeno": "Margot 100g",
   "cena":  15,
   "img":   "margot.jpg"
+},
+
+{
+  "id":    "kofila",
+  "jmeno": "Kofila 45g",
+  "cena":  14,
+  "img":   "kofila.jpg"
 },
 
 
@@ -98,10 +117,10 @@
 },
 
 {
-  "id":    "kofila",
-  "jmeno": "Kofila 45g",
+  "id":    "tribit",
+  "jmeno": "Tribit",
   "cena":  14,
-  "img":   "kofila.jpg"
+  "img":   "tribit.jpg"
 },
 
 {

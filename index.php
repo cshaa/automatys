@@ -76,19 +76,24 @@ AUTOMAT
 </header>
 
 <div class="notification">
-Prodloužili jsme pro Vás otevírací dobu!
+Bonzáci, čuráci, tak jsme doprodávali!
 </div>
 
 
 <?php
 // Zde je Michalův magický kód
-include "produkty.php";
+//include "produkty.php";
 ?>
 
+<a style=font-size:5em href="https://www.petice24.com/petice_proti_pamlskove_vyhlace_na_gymnaziich#form">Petice</a>
 
+
+<!-- BlueBoard.cz Navstevni kniha -->
+<iframe seamless style=width:100%;margin-top:100px;height:700px;border:none src="http://miniaplikace.blueboard.cz/kniha/pm9ktr5ox9tjk6jpks5cr6t21sprd7">Návštěvní kniha</a>
+<!-- BlueBoard.cz Navstevni kniha KONEC -->
 
 <br>
-
+<!--
 <input type="text" placeholder="Jméno" name="name" required><br />
 <input type="email" placeholder="Email" name="email"></p>
 <p class="doruceni">* Nepovinný údaj</p>
@@ -141,7 +146,7 @@ include "produkty.php";
 <a href="feedback"><p class="feedback">Nenašli jste co jste hledali? Napište nám...</p></a>
 
 
-
+-->
 </div>
 
 <iframe class=add><endora></iframe>

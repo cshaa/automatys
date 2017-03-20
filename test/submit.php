@@ -108,43 +108,38 @@ foreach( $produkty as $p ){
 
 }
 
-if( !isset($_POST['promokod']) || empty($_POST['promokod']) ){
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ↓
+If(isset($_POST['promokod']) && !empty($_POST['promokod'])){
 	$promo = $_POST['promokod'];
 	require 'connect.inc.php';
-
-	$result = $mysqli -> query(
-		"SELECT * FROM Promo_codes WHERE unique_key = '$promo'"
-	);
-
-
-	if($result->num_rows != 1)
-		$promokod_error = "Neexistující promo kód";
-
-	else {
+	$sql_1 = "SELECT * FROM Promo_codes WHERE unique_key = '$promo'";
+	$result =  $mysqli->query($sql_1);
+	If($result->num_rows != 1){
+		$promokod_validity = "InValid";
+	}elseif ($result->num_rows == 1) {
 		while($row = $result->fetch_assoc()) {
+			if ($row['validity'] == 0) {
+				$promokod_validity = "Used";
+			}else{
+				$promokod_validity = "Valid";
 
-			if( !$row['validity'] )
-				$promokod_error = "Již použitý promo kód";
+				$promo_msg 		= $row['text'];
+				If($row['discount'] > 0){
+					$promokod_validity = "Valid_discount";
+					$price_puvodni = $cena;
+					$cena = $cena - (($cena/100)*$row['discount']);
+					$discount = $row['discount']; 
 
-			else {
-				$promo_msg = $row['text'];
-				$sleva = $row['discount']; //Sleva v procentech
-
-				if($sleva > 0){
-					$puvodni_cena = $cena;
-					$cena -= $cena * $sleva/100;
-
-					$mysqli -> query(
-						"UPDATE Promo_codes SET validity=0 WHERE unique_key='$promo'"
-					);
-				}
-
-			}//konec validity
-		}//konec while
-	}//konec existence
-}//konec promokódu
-
+					$sql_00 = "UPDATE Promo_codes SET validity=0 WHERE unique_key='$promo'";
+					$mysqli->query($sql_00);
+				}		
+			}
+		}
+	}
+}else{
+	$promo_msg = "NE";
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ↑
 
 
 
@@ -157,12 +152,13 @@ if( $cena == 0 )
 elseif( $timestamp == "0" || $misto == "0" )
 
 	echo '<p class="error">Vyplňte platné datum a místo doručení</p>';
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ↓
+elseif($promokod_validity == "InValid")
+	echo '<p class="error">Neexistující promo kód</p>';
 
-elseif( $promokod_error )
-	echo "<p class="error">$promokod_error</p>";
-
-
-
+elseif($promokod_validity == "Used")
+	echo '<p class="error">Již použitý promo kód</p>';
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ↑
 /*
 	Všechno v cajku, objednej!
 */
@@ -175,15 +171,11 @@ else{
 	$text .= napis_radek('Email',           $email  );
 	$text .= napis_radek('Učebna',          $misto  );
 	$text .= napis_radek('Čas',             $cas    );
-
-	if( $promo_msg )
-		$text .= napis_radek('Promo kód', $promo_msg);
-
-	if( $sleva )
-		$text .= napis_radek('Sleva', $sleva);
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ↓
+	$text .= napis_radek('Promo kód',    	$promo_msg);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ↑
 	$text .= $hr;
-	$text .= napis_radek('Celková cena', $cena);
+	$text .= napis_radek('Celková cena',    $cena   );
 
 	if ($student == "666") {
 		$machine = 'Test';
@@ -229,21 +221,21 @@ else{
 				*/
 
 				require'connect.inc.php';
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ↓
 				$sql = "INSERT INTO Objednavky (
 					true_id, unique_key, date_processing, name, email, product,
 					time_delivery, place,price_puvodni, price,promo_code,promo_msg,promo_discount, done, storno, spam)
 					VALUES ('$objednavka', '$unique_id', '$date_processing',
-						'$student', '$email','$query','$timestamp','$misto ','$puvodni_cena',
-						'$cena','$promo','$promo_msg','$sleva',FALSE,FALSE,FALSE)";
-
-				if( $mysqli -> query($sql) ){
+						'$student', '$email','$query','$timestamp','$misto ','$price_puvodni',
+						'$cena','$promo','$promo_msg','$discount',FALSE,FALSE,FALSE)";
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ↑
+				if(mysqli_query($mysqli, $sql)){
 
 				    echo "Records inserted successfully.";
 
 				} else{
 
-				    echo "ERROR: Could not able to execute $sql. " . mysqli_error($mysqli);
+				    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
 
 				}
 
@@ -251,7 +243,7 @@ else{
 
 				// Close connection
 
-				mysqli_close($mysqli);
+				mysqli_close($link);
 
 
 

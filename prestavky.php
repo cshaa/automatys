@@ -11,6 +11,12 @@
     */
     $delta_t = 3;
 
+		/*
+			Od kolika hodin umožňujeme objednávat
+			na další den (v minutách).
+		*/
+		$odpoledne = 12*60;
+
     /*
       Časy všech přestávek
     */
@@ -151,41 +157,62 @@
 
 
     /*
-      Vypiš všechny relevantní přestávky
+      Tato funkce vypíše všechny relevantní přestávky.
+			Koukněte na tu syntax – zlatej JavaScript 😢
     */
-    while(true){ // Žíít jako kaskadéér...
+		$vypis_prestavky = function ($den_v_tydnu,$dalsi_prestavka)
+		use ($dnes,$nas_rozvrh,$prestavky,$dny_slovnik,$datetime){
 
-      $dalsi_prestavka = strpos($dnesni_rozvrh,"X",$dalsi_prestavka);
+	    while(true){ // Žíít jako kaskadéér...
 
-      if($dalsi_prestavka === false){
-        // Už jsi vypsal všechny přestávky.
-        // THOU SHALT RETURN TO SLUMBER!
-        break;
-      }
+				$dnesni_rozvrh = $nas_rozvrh[ $den_v_tydnu ];
 
-      $zacatek_prestavky = hhmm($prestavky[ $dalsi_prestavka ][0]);
-      $konec_prestavky   = hhmm($prestavky[ $dalsi_prestavka ][1]);
+				//Najdi další přestávku, kdy dodáváme
+				//Začni hledat na indexu $dalsi_prestavka
+	      $dalsi_prestavka = strpos($dnesni_rozvrh,"X",$dalsi_prestavka);
 
-      // Formát textu: (začátek) - (konec) / (den)
-      $text = $zacatek_prestavky." - ".$konec_prestavky." / ";
+	      if($dalsi_prestavka === false){
+	        // Už jsi vypsal všechny přestávky.
+	        // THOU SHALT RETURN TO SLUMBER!
+	        break;
+	      }
 
-      $delta_d = $den_v_tydnu - $dnes; // Kolik dní do dodávky
-      $delta_d = ($delta_d + 7) % 7; // Pondělí je od neděle 1 den daleko!
+	      $zacatek_prestavky = hhmm($prestavky[ $dalsi_prestavka ][0]);
+	      $konec_prestavky   = hhmm($prestavky[ $dalsi_prestavka ][1]);
 
-      if($delta_d == 0) $text.="Dnes";
-      elseif($delta_d == 1) $text.="Zítra";
-      else $text.= $dny_slovnik[ $den_v_tydnu ];
+	      // Formát textu: (začátek) - (konec) / (den)
+	      $text = $zacatek_prestavky." - ".$konec_prestavky." / ";
 
-			// HH
-			$datetime -> setTime(0, $prestavky[ $dalsi_prestavka ][0]);
-			$value = $datetime -> getTimestamp();
+	      $delta_d = $den_v_tydnu - $dnes; // Kolik dní do dodávky
+	      $delta_d = ($delta_d + 7) % 7; // Pondělí je od neděle 1 den daleko!
 
-      // Vypiš html kód
-      ?><option value="<?=$value?>"><?=$text?></option><?php
+	      if($delta_d == 0) $text.="Dnes";
+	      elseif($delta_d == 1) $text.="Zítra";
+	      else $text.= $dny_slovnik[ $den_v_tydnu ];
 
-      $dalsi_prestavka++;
+				// HH
+				$datetime -> setTime(0, $prestavky[ $dalsi_prestavka ][0]);
+				$value = $datetime -> getTimestamp();
 
-    }// konec while
+	      // Vypiš html kód
+	      ?><option value="<?=$value?>"><?=$text?></option><?php
+
+	      $dalsi_prestavka++;
+
+	    }// konec while
+
+		};// konec fce
+
+
+
+		/*
+			Vypiš přestávky na zvolený den.
+			Pokud je to dnešek a už je po obědě, vypiš i zítřek.
+		*/
+		$vypis_prestavky($den_v_tydnu,$dalsi_prestavka);
+
+		if($den_v_tydnu == $dnes && $minuta_v_dnu>=$odpoledne)
+			$vypis_prestavky($dnes+1,0);
 
   ?>
 

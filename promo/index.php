@@ -1,3 +1,16 @@
+<style type="text/css">
+	td{
+		width: 15%;
+		border-left: 1px solid black;
+	}
+	p{
+		position: relative;
+		margin-left: 10px
+	}
+	table{
+    	width: 100%;
+	}
+</style>
 <?php
 If($_GET['heslo'] == "kokot123"){
 
@@ -25,7 +38,10 @@ input[type=text],input[type=number]{
 	background-color: lightgrey;
 }
 p {
-	color: grey;
+	color: black;
+}
+#amout{
+	width: 86px;
 }
 </style>
 <?php
@@ -46,32 +62,40 @@ $random_string = randomString();
 <input type="text" id="code" name="code" value="<?=randomString()?>" readonly="readonly"/><br />
 <textarea name="msg"></textarea><br />
 <input type="number" placeholder="% sleva na celý nákup" name="prcenta"><br/>
+<br/>
+Množství totožných promokódů: <input type="number" value ="1" id="amout" name="amout" min="1"><br/><br/>
 <input type="submit" name="" value="Uložit promo kód">
+
 </form>
-
+<a href="all/?heslo=kokot123">Ostatní promokódy</a>
+<br/>
+<br />
 <?php
-
-If(isset($_POST['msg']) && !empty($_POST['msg'] || $_POST['prcenta']) && !empty($_POST['prcenta'])){
+If(isset($_POST['msg']) && !empty($_POST['msg']) || isset($_POST['prcenta']) && !empty($_POST['prcenta'])){
 	require '../connect.inc.php';
 	$unique_key = $_POST['code'];
 	$text 		= $_POST['msg'];
 	$discount	= $_POST['prcenta'];
-	$sql_1 = "SELECT * FROM Promo_codes WHERE unique_key = '$unique_key'";
-	$result =  $mysqli->query($sql_1);
-		if ($result->num_rows == 0) {
-			$sql_2 = "INSERT INTO Promo_codes (unique_key, text, discount) VALUES ('$unique_key', '$text', '$discount')";
-			if(mysqli_query($mysqli, $sql_2)){
-				echo "<p>Váš promo kód ".$unique_key. " úspěšně přidán</p><br />";
-				echo "<p>".$_POST['msg']."</p>";
-			} else{
-				echo "ERROR: Could not able to execute $sql.";
+	$i = $_POST['amout'];
+echo "<table>";
+		$a = 1;
+		while ($a <= $i) {
+    		
+    		$sql_1 = "SELECT * FROM Promo_codes WHERE unique_key = '$unique_key'";
+			$result =  $mysqli->query($sql_1);
+			if ($result->num_rows == 0) {
+				$sql_2 = "INSERT INTO Promo_codes (unique_key, text, discount) VALUES ('$unique_key', '$text', '$discount')";
+					if(mysqli_query($mysqli, $sql_2)){
+						echo '<tr><td><p>'.$a."</p></td><td><p>".$unique_key."</p></td><td><p>".$text."</p></td><td><p> Sleva ".$discount." % na celý nákup</p></td></tr>";
+						$a++;
+					}
 			}
-		  mysqli_close($mysqli);
-	}else{
-		echo "Již existující promo kód ".$_POST['code'];
+			$unique_key = randomString();
+		}
+echo "<table>";	
 	}
 
-}
+
 ?>
 
 

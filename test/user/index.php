@@ -67,35 +67,54 @@ Na této stránce budete online informování o stavu Vaší objednávky.
 
 <div id="hlaska">
 <?php
-	If(isset($_GET['id'])){
-		$unique_key = $_GET['id'];
+
+	if(isset($_GET['id'])){
+
 		require '../connect.inc.php';
-		$sql = "SELECT * FROM Objednavky WHERE unique_key = '$unique_key'";
+		$unique_key = $_GET['id'];
 
-		if ($result =  $mysqli->query($sql)) {
-			if ($result->num_rows == 1) {
-				while ( $row = $result->fetch_assoc()) {
-					echo "<ul>";
-						if($row['storno'] == 1){
-							echo "<li><p>Čas doručení<br><s>". date("d.m.Y \** H:i:s", $row["time_delivery"])."</s><p></li>";
-							echo "<li><p><s>Cena: ". $row['price']." Kč</s></p></li>";
-						}else{
-							echo "<li><p>Čas doručení<br>". date("d.m.Y \** H:i:s", $row["time_delivery"])."<p></li>";
-								If($row['price_puvodni'] > 0){
-								echo "<li>	<p>Cena: ".$row['price'].' Kč</p><br />
-											<p id="puvodni_cena">'.$row['price_puvodni']." Kč</p></li>";	
-								}else{
-								echo "<li><p>Cena: ". $row['price']." Kč</p></li>";	
-								}
-						}
+		$result = $mysqli -> query(
+			"SELECT * FROM Objednavky WHERE unique_key = '$unique_key'"
+		);
 
-						If(!empty($row['promo_code'])){
-								echo "Promo kód přijat";
-								echo "<p>".$row['promo_msg']."</p>";	
-						}
+		if( $result ){
+			if( $result->num_rows == 1 ) {
+
+				while ( $row = $result->fetch_assoc() ) {
+					?>
+					<ul>
+
+						<!-- Stornované? -->
+						<?php if( $row['storno'] ){ ?>
+							<li><p>
+								Čas doručení<br>
+								<s><?=date("d.m.Y \** H:i:s", $row["time_delivery"])?></s>
+							</p></li>
+							<li><p><s>Cena: <?=$row['price']?> Kč</s></p></li>
+
+						<?php }else{ ?>
+							<li><p>
+								Čas doručení<br>
+								<?=date("d.m.Y \** H:i:s", $row["time_delivery"])?>
+							</p></li>
+
+						<?php } ?>
+						<!-- Konec Stornované? -->
 
 
-						
+						<li><p>Cena: ". $row['price']." Kč</p>
+							<?php if($row['price_puvodni']){ ?>
+								<br /><p id="puvodni_cena"><?=$row['price_puvodni']?> Kč</p>
+							<?php } ?>
+						</li>
+
+						<?php if( $row['promo_code'] ){ ?>
+								<li>Promo kód přijat <p><?=$row['promo_msg']?></p>
+								if($row['promo_discount'] !=0)echo "<p> Sleva na celý nákup ".$row['promo_discount']." %</p>";
+						<?php } ?>
+
+
+
 						if($row['done'] == 0 && $row['storno'] == 0){
 							echo "<li><p>Stav: Nevyřízeno</p></li>";
 							echo '<li><p><a href="del.php?a=1&id='.$row["unique_key"].'">STORNOVAT</a></p></li>';
@@ -106,7 +125,7 @@ Na této stránce budete online informování o stavu Vaší objednávky.
 						if ($row['done'] == 1 && $row['storno'] == 0) {
 							echo "<li><p>Stav: Vyřízeno</p></li>";
 						}
-					
+
 					echo '<li><p><a href="/">Zpět do automatu</a></p></li>';
 					echo "</ul>";
 				}

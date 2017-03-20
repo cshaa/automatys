@@ -39,14 +39,7 @@
 },
 
 
-{
-  "id":    "croissantVisen",
-  "jmeno": "7Days Croissant",
-  "cena":  15,
-  "img":   "croissant_visen.jpg",
-  "akce": "Akce",
-  "detail": "Višeň"
-},
+
 
 {
   "id":    "veselakrava",
@@ -81,12 +74,6 @@
   "img":   "margot.jpg"
 },
 
-{
-  "id":    "tribit",
-  "jmeno": "Tribit 46g",
-  "cena":  15,
-  "img":   "tribit.jpg"
-},
 
 {
   "id":    "cocacola",
@@ -138,7 +125,7 @@
   "detail": "Pomeranč",
   "cena":  15,
   "img":   "caprisonne_orange.jpg"
-  
+
 }
 
 ]

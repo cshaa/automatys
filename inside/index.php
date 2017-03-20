@@ -6,6 +6,9 @@
 		font-size: 2em;
 		margin-left: 20px;
 	}
+	.simportant{
+		font-size: 3.5em;
+	}
 	#bottom{
 		font-size: 3em;
 		margin-left: 20px;
@@ -14,16 +17,24 @@
 	a{
 		margin-left: 20px;
 		margin-right: 10px;
-		font-size: 130%;
+		font-size: 1.5em;
 	}
 	.link{
 		margin-top: 30px;
 	    padding-bottom: 14px;
 	    list-style: none;
 	}
+	.done{
+		text-decoration: line-through;
+	}
 
 
 </style>
+<script type="text/javascript">
+function done(e){
+  e.target.classList.add("done");
+}
+</script>
 <?php
 $fail 	= 0;
 $trzba 	= 0;
@@ -58,18 +69,32 @@ require '../connect.inc.php';
         		if($row["done"] == 1){$color="green";$done++;$trzba+=$row["price"];}elseif($row["done"] == 0 && $row["storno"] == 0){$color="red";$fail++;}
 		    		if ($row["storno"] == 1){$color="grey";}
 		    		if ($row["name"] == 666){$color="pink";}
+					$puvodni_cena = "";
 					echo '<ul style="background:'.$color.';">';
 					echo '<li class=unimportant>Id: ' .$row["true_id"]."</li>";
 					echo '<li class=unimportant>Unique key: ' .$row["unique_key"]."</li>";
 					echo '<li class=unimportant>Č.P.O.: '. date("d.m.Y  \-- H:i:s", $row["true_id"])."</li>";
+
+					IF(!empty($row['promo_code'])){
+						echo '<li class=unimportant>Promo code: '. $row["promo_code"]."</li>";
+						if($row['price_puvodni'] !=0)$puvodni_cena = "<s>".$row["price_puvodni"]." Kč</s> ";
+					}
+
 					echo "<li class=important>Čas:".date("d.m.Y \** H:i:s", $row["time_delivery"])."</li>";
 					echo "<li class=important>Třída: ".$row["place"]."</li>";
 					echo "<li class=important>Jméno: ".$row["name"]."</li>";
-					echo "<li class=important>Cena: ".$row["price"]." Kč</li>";
+					echo "<li class=important>Cena: ".$puvodni_cena.$row["price"]." Kč</li>";
+					IF(!empty($row['promo_code'])){
+						echo "<li class=important> Promo kód: Přijat </li>";
+						echo "<ul><li class=important> Hodnota: ". $row['promo_msg']."</li>";
+							if($puvodni_cena != "")echo "<li class=important>Sleva na celý nákup: ". $row['promo_discount']." %</li>";
+						echo "</ul>";
+
+						}
 			       	echo "<ul>";
 			       	//zde parsovat json
        				foreach (explode(';',$row["product"]) as $product) {
-        				echo "<li class=important>";
+        				echo "<li class=simportant onclick=done(event)>";
 
 								list($product_id, $count) = explode("@",$product);
 								list($product_id, $variant) = explode("/",$product_id);
@@ -81,6 +106,7 @@ require '../connect.inc.php';
 
 								echo $p['jmeno'];
 								if($variant) echo " ($variant)";
+								elseif( isset($p['detail']) ) echo " ($p[detail])";
 								echo ", $count kusů";
 
 								echo "</li>";
